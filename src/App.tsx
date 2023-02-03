@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import Reactflow from '@/providers/Reactflow'
 import Background from '@/components/Background'
-import Controls from '@/components/Controls'
+import InteractiveControls from '@/components/InteractiveControls'
+import SidebarControls from './components/SidebarControls'
 
 function App() {
     return (
         <Reactflow>
             <Background />
-            <Controls />
+            <InteractiveControls />
+            <SidebarControls />
         </Reactflow>
     )
 }

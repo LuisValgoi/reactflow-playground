@@ -13,7 +13,7 @@ const SHOW_FIT_VIEW_BUTTON = false
 
 const SHOW_INTERACTIVE_BUTTON = false
 
-const Controls: React.FC = () => {
+const InteractiveControls: React.FC = () => {
     return (
         <ControlsRF
             showFitView={SHOW_FIT_VIEW_BUTTON}
@@ -31,4 +31,4 @@ const Controls: React.FC = () => {
     )
 }
 
-export default Controls
+export default InteractiveControls
