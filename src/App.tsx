@@ -1,16 +1,26 @@
 import React, { useState } from 'react'
-import Reactflow from '@/providers/Reactflow'
 import Background from '@/components/Background'
 import InteractiveControls from '@/components/InteractiveControls'
-import SidebarControls from './components/SidebarControls'
+import SidebarControls from '@/components/SidebarControls'
+import SearchMessage from '@/components/SidebarControls/SearchMessage'
+
+import { MessageListProvider } from '@/providers/MessageList'
+import Reactflow from '@/providers/Reactflow'
+
+import Messages from '@/containers/Messages'
 
 function App() {
     return (
-        <Reactflow>
-            <Background />
-            <InteractiveControls />
-            <SidebarControls />
-        </Reactflow>
+        <MessageListProvider>
+            <Reactflow>
+                <Background />
+                <InteractiveControls />
+                <SidebarControls>
+                    <SearchMessage />
+                    <Messages />
+                </SidebarControls>
+            </Reactflow>
+        </MessageListProvider>
     )
 }
 
