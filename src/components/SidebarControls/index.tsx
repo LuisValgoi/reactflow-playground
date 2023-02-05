@@ -9,12 +9,14 @@ import styles from './index.module.scss'
 const SidebarControls: React.FC = () => {
     const [collapsed, setCollapsed] = useState(false)
 
+    const sidebarClasses = classNames(styles.sidebarControls)
+
     const toggleButtonClasses = classNames({ [styles.collapsed]: collapsed })
 
-    const headingClasses = classNames({ [styles.collapsed]: collapsed })
+    const headingClasses = classNames(styles.heading, { [styles.collapsed]: collapsed })
 
     return (
-        <aside className={styles.sidebarControls}>
+        <aside className={sidebarClasses}>
             <div className={styles.sidebarControlsHead}>
                 <h1 className={headingClasses}>Library</h1>
                 <button

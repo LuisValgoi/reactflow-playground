@@ -31,14 +31,14 @@
             }
         }
 
-        & h1 {
-            font-family: 'Urbanist';
-
-            &.collapsed {
-                display: none;
-            }
-        }
-
     }
 }
 
+.heading {
+    line-height: 0;
+    font-family: 'Urbanist';
+
+    &.collapsed {
+        display: none;
+    }
+}

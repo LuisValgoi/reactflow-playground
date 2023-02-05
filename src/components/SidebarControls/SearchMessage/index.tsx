@@ -5,13 +5,13 @@ import styles from './index.module.scss'
 
 const SearchMessage: React.FC<
     JSX.IntrinsicElements['input'] & { controlsCollapsed: boolean }
-> = (props) => {
+> = ({controlsCollapsed, ...restProps}) => {
     const searchClasses = classNames(styles.searchMessage, {
-        [styles.collapsed]: props.controlsCollapsed,
+        [styles.collapsed]: controlsCollapsed,
     })
     return (
         <input
-            {...props}
+            {...restProps}
             alt="search message"
             className={searchClasses}
         />
