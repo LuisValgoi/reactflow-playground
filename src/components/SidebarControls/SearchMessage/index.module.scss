@@ -1,11 +1,11 @@
 .searchMessage {
+    position: relative;
     border: 1px solid lightblue;
     padding: 1rem;
     background-color: white;
     border: 1px solid #F0F1F9;
     outline: 2px solid #b4b6c3;
     border-radius: 0.5rem;
-    min-width: 300px;
 
     &::placeholder {
         color: lightgray;
