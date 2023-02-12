@@ -5,7 +5,7 @@ import HamburgerIcon from '@/assets/icons/hamburger.svg'
 
 import styles from './index.module.scss'
 
-const SidebarControls: React.FC<{} & JSX.IntrinsicElements['aside']> = (
+const SidebarControls: React.FC<{} & JSX.IntrinsicElements['div']> = (
     props
 ) => {
     const [collapsed, setCollapsed] = useState(false)
@@ -25,8 +25,8 @@ const SidebarControls: React.FC<{} & JSX.IntrinsicElements['aside']> = (
     })
 
     return (
-        <aside className={sidebarClasses} {...props}>
-            <head className={headClasses}>
+        <div className={sidebarClasses} {...props}>
+            <div className={headClasses}>
                 <h1>Library</h1>
                 <button
                     className={toggleClasses}
@@ -34,9 +34,9 @@ const SidebarControls: React.FC<{} & JSX.IntrinsicElements['aside']> = (
                 >
                     <img src={HamburgerIcon} alt="menu" />
                 </button>
-            </head>
+            </div>
             <div className={childrenClasses}>{props.children}</div>
-        </aside>
+        </div>
     )
 }
 

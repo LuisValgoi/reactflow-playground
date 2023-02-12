@@ -10,7 +10,7 @@ li.container {
 
     &:after {
         border-radius: 0.5rem;
-        content: "Click to add";
+        content: " ";
         text-transform: uppercase;
         color: #fff;
         position: absolute;
@@ -21,7 +21,7 @@ li.container {
         height: 100%;
         top: 0;
         left: 0;
-        background: rgba(0, 0, 0, 0.5);
+        background: rgba(0, 0, 0, 0.1);
         opacity: 0;
     }
 

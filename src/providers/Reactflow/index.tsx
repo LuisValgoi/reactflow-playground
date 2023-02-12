@@ -1,14 +1,39 @@
-import React, { PropsWithChildren } from 'react'
-import { ReactFlow } from 'reactflow'
+import { createContext, DragEvent, useContext } from 'react'
 
-import 'reactflow/dist/style.css'
+import { ReactFlowState as ReactFlowStateOriginal, ReactFlowProvider as ReactFlowProviderOriginal } from 'reactflow'
 
-const HIDE_REACT_FLOW_WATERMARK = true;
+import { addNode, setMoveEffect } from '@/utils/ReactFlow'
 
-const Reactflow: React.FC<PropsWithChildren> = ({ children }) => {
+type ReactFlowState = {
+    addMessage: (event: DragEvent<HTMLElement>, nodeType: string) => void
+}
+
+const ReactFlowContext = createContext<ReactFlowState>({} as ReactFlowState)
+
+export function ReactFlowProvider({
+    children
+}: { children: JSX.Element }) {
+    const addMessage = (event: DragEvent<HTMLElement>, nodeType: string) => {
+        addNode(event, nodeType)
+        setMoveEffect(event)
+    }
+
     return (
-        <ReactFlow proOptions={{ hideAttribution: HIDE_REACT_FLOW_WATERMARK }}>{children}</ReactFlow>
+        <ReactFlowProviderOriginal>
+            <ReactFlowContext.Provider value={{ addMessage }}>
+                {children}
+            </ReactFlowContext.Provider>
+        </ReactFlowProviderOriginal>
     )
 }
 
-export default Reactflow
+export function useReactFlow() {
+    const context = useContext(ReactFlowContext)
+
+    if (!context) {
+        throw new Error('hook must be used within a provider')
+    }
+
+    const { addMessage } = context
+    return { addMessage }
+}
