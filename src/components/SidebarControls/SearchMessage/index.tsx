@@ -10,6 +10,7 @@ const SearchMessage: React.FC<{} & JSX.IntrinsicElements['input']> = (
     return (
         <input
             {...props}
+            tabIndex={0}
             alt="search message"
             placeholder="Search Messages..."
             className={searchClasses}

@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useRef, useState, LegacyRef, RefObject } from 'react'
+import { useScroll } from 'react-use'
 import classNames from 'classnames'
 
 import HamburgerIcon from '@/assets/icons/hamburger.svg'
@@ -10,8 +11,15 @@ const SidebarControls: React.FC<{} & JSX.IntrinsicElements['div']> = (
 ) => {
     const [collapsed, setCollapsed] = useState(false)
 
+    const sidebarRef = useRef<HTMLDivElement>() as RefObject<HTMLElement>
+    const { y: sidebarScrollY } = useScroll(sidebarRef)
+
     const sidebarClasses = classNames(styles.sidebarControls, {
         [styles.sidebarCollapsed]: collapsed,
+    })
+
+    const sidebarSpanClasses = classNames({
+        [styles.sidebarControlsLayer]: sidebarScrollY === 0,
     })
 
     const headClasses = classNames(styles.sidebarControlsHead, {
@@ -25,10 +33,16 @@ const SidebarControls: React.FC<{} & JSX.IntrinsicElements['div']> = (
     })
 
     return (
-        <div className={sidebarClasses} {...props}>
+        <div
+            ref={sidebarRef as LegacyRef<HTMLDivElement> | undefined}
+            className={sidebarClasses}
+            {...props}
+        >
+            <span className={sidebarSpanClasses} />
             <div className={headClasses}>
                 <h1>Library</h1>
                 <button
+                    tabIndex={0}
                     className={toggleClasses}
                     onClick={() => setCollapsed(!collapsed)}
                 >

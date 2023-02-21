@@ -12,7 +12,7 @@ const Background: React.FC<BackgroundProps> = (props) => {
             variant={BackgroundVariant.Dots}
             gap={10}
             size={1}
-            color="#ddd"
+            color="#cdcdcd"
             {...props}
         />
     )

@@ -17,7 +17,7 @@ const Message: React.FC<MessagesProps> = ({
     const containerClasses = classNames(styles.container, className)
 
     return (
-        <li className={containerClasses} {...restProps}>
+        <li tabIndex={0} className={containerClasses} {...restProps}>
             <div className={styles.head}>{heading}</div>
             <div className={styles.content}>{content}</div>
         </li>

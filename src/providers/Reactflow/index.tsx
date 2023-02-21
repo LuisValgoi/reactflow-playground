@@ -1,6 +1,6 @@
 import { createContext, DragEvent, useContext } from 'react'
 
-import { ReactFlowState as ReactFlowStateOriginal, ReactFlowProvider as ReactFlowProviderOriginal } from 'reactflow'
+import { ReactFlowProvider as ReactFlowProviderOriginal } from 'reactflow'
 
 import { addNode, setMoveEffect } from '@/utils/ReactFlow'
 

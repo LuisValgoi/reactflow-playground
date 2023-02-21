@@ -8,9 +8,16 @@ li.container {
     position: relative;
     cursor: pointer;
 
+    &:focus {
+        border-radius: 0.5rem;
+        border-color: aquamarine;
+        border-style: solid;
+        border-width: 2px;
+    }
+
     &:after {
         border-radius: 0.5rem;
-        content: " ";
+        content: ' ';
         text-transform: uppercase;
         color: #fff;
         position: absolute;
