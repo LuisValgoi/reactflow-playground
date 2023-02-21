@@ -1,4 +1,5 @@
 import React, {
+    BaseSyntheticEvent,
     DragEvent,
     MutableRefObject,
     useCallback,
@@ -15,7 +16,7 @@ import {
     useNodesState,
 } from 'reactflow'
 
-import { getNode, setMoveEffect } from '@/utils/ReactFlow'
+import { getNode, isNodeInPane, setMoveEffect } from '@/utils/ReactFlow'
 
 import 'reactflow/dist/style.css'
 
@@ -39,6 +40,10 @@ const ReactFlow: React.FC<
 
     const onDrop = useCallback(
         (event: DragEvent<HTMLElement>) => {
+            if (!isNodeInPane(event as any)) {
+                return
+            }
+
             event.preventDefault()
             const newNode = getNode(event, skeletonRef, instance) as Node
             setNodes((nodes) => nodes.concat(newNode))

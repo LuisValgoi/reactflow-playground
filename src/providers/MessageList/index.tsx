@@ -1,16 +1,23 @@
-import { IMessage } from '@/interfaces/message'
 import { createContext, useContext } from 'react'
 
-type MessageListState = {
+export type IMessageType = 'input' | 'output' | 'default'
+
+export type IMessage = {
+    title: string
+    content: string
+    type: IMessageType
+}
+
+export type IMessageListState = {
     messages: IMessage[]
 }
 
-const MessageListContext = createContext<MessageListState>(
-    {} as MessageListState
+const MessageListContext = createContext<IMessageListState>(
+    {} as IMessageListState
 )
 
 export function MessageListProvider({ children }: { children: JSX.Element }) {
-    const messages = [
+    const messages: IMessage[] = [
         {
             title: 'USER-08433-Q',
             type: 'input',

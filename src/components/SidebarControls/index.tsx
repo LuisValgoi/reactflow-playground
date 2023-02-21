@@ -11,7 +11,8 @@ const SidebarControls: React.FC<{} & JSX.IntrinsicElements['div']> = (
 ) => {
     const [collapsed, setCollapsed] = useState(false)
 
-    const sidebarRef = useRef<HTMLDivElement>() as RefObject<HTMLElement>
+    const sidebarRef = useRef<HTMLDivElement>(null) as RefObject<HTMLElement>
+
     const { y: sidebarScrollY } = useScroll(sidebarRef)
 
     const sidebarClasses = classNames(styles.sidebarControls, {
