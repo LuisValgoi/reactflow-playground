@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { DragEvent } from 'react'
 
-import Message from '@/components/SidebarControls/Message'
+import MessageBase from '@/components/MessageBase'
 
 import { useMessageList } from '@/providers/MessageList'
 import { useReactFlow } from '@/providers/ReactFlow'
@@ -14,9 +14,12 @@ const Messages: React.FC = () => {
     return (
         <ul className={styles.list}>
             {messages.map((message) => (
-                <Message
+                <MessageBase
+                    As="li"
                     draggable
-                    onDragStart={(event) => addMessage(event, message.type)}
+                    onDragStart={(event: DragEvent<HTMLLIElement>) =>
+                        addMessage(event, message.type)
+                    }
                     key={message.title}
                     heading={message.title}
                     content={message.content}

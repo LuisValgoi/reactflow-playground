@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react'
 
-export type IMessageType = 'input' | 'output' | 'default'
+export type IMessageType = 'input' | 'output' | 'default' | 'messageNR'
 
 export type IMessage = {
     title: string
@@ -20,7 +20,7 @@ export function MessageListProvider({ children }: { children: JSX.Element }) {
     const messages: IMessage[] = [
         {
             title: 'USER-08433-Q',
-            type: 'input',
+            type: 'messageNR',
             content:
                 'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
         },

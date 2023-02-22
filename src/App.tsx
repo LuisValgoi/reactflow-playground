@@ -3,7 +3,7 @@ import { MutableRefObject, useRef } from 'react'
 import Background from '@/components/Background'
 import InteractiveControls from '@/components/InteractiveControls'
 import SidebarControls from '@/components/SidebarControls'
-import SearchMessage from '@/components/SidebarControls/SearchMessage'
+import SearchMessage from '@/components/SearchMessage'
 import Skeleton from '@/components/Skeleton'
 
 import { MessageListProvider } from '@/providers/MessageList'

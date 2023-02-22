@@ -1,12 +1,13 @@
 import React, {
-    BaseSyntheticEvent,
     DragEvent,
     MutableRefObject,
     useCallback,
+    useMemo,
     useState,
 } from 'react'
 
 import {
+    NodeTypes,
     addEdge,
     Connection,
     Node,
@@ -18,6 +19,8 @@ import {
 
 import { getNode, isNodeInPane, setMoveEffect } from '@/utils/ReactFlow'
 
+import MessageNR from '@/components/MessageNR'
+
 import 'reactflow/dist/style.css'
 
 const HIDE_REACT_FLOW_WATERMARK = true
@@ -28,6 +31,7 @@ const ReactFlow: React.FC<
     const [nodes, setNodes, onNodesChange] = useNodesState([])
     const [edges, setEdges, onEdgesChange] = useEdgesState([])
     const [instance, setInstance] = useState<any>()
+    const nodeTypes = useMemo(() => ({ messageNR: MessageNR as any }), [])
 
     const onConnect = useCallback((connection: Connection) => {
         setEdges((eds) => addEdge(connection, eds))
@@ -56,6 +60,7 @@ const ReactFlow: React.FC<
             proOptions={{ hideAttribution: HIDE_REACT_FLOW_WATERMARK }}
             nodes={nodes}
             edges={edges}
+            nodeTypes={nodeTypes}
             onNodesChange={onNodesChange}
             onEdgesChange={onEdgesChange}
             onConnect={onConnect}
