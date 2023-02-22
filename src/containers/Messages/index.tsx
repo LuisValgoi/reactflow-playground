@@ -15,7 +15,7 @@ const Messages: React.FC = () => {
         <ul className={styles.list}>
             {messages.map((message) => (
                 <MessageBase
-                    As="li"
+                    as="li"
                     draggable
                     onDragStart={(event: DragEvent<HTMLLIElement>) =>
                         addMessage(event, message.type)
