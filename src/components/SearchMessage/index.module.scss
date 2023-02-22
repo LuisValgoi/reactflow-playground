@@ -5,13 +5,14 @@
     background-color: white;
     border-radius: 0.5rem;
     outline: lightgrey solid 1px;
-    
+
     &::placeholder {
         color: lightgrey;
         font-style: italic;
     }
 
-    &:focus,:active {
+    &:focus,
+    :active {
         outline: lightgrey solid 2px;
     }
 }

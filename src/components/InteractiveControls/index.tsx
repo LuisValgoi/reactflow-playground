@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { Controls as ControlsRF, ControlButton, PanelPosition } from 'reactflow'
 
-import WarningIcon from "@/assets/icons/warning.svg";
+import WarningIcon from '@/assets/icons/warning.svg'
 
-import MessageIcon from "@/assets/icons/message.svg";
+import MessageIcon from '@/assets/icons/message.svg'
 
 import styles from './index.module.scss'
 

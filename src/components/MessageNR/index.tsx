@@ -1,44 +1,44 @@
-import React from 'react'
-import { Handle, Position } from 'reactflow'
-import MessageBase from '../MessageBase'
+import { IMessage } from '@/providers/MessageList'
+import React, { memo } from 'react'
+import { Node, Position } from 'reactflow'
 
-type MessageNRProp = {
-    heading: string
-    content: string
-} & JSX.IntrinsicElements['div']
+import MessageBase from '@/components/MessageBase'
+import MessageResponse from '@/components/MessageResponseButton'
 
-const MessageNR: React.FC<MessageNRProp> = ({ heading, content }) => {
-    debugger
+import styles from './index.module.scss'
+
+const MessageNR: React.FC<Node<IMessage>> = ({ ...restProps }) => {
     return (
-        <MessageBase heading={heading} content={content}>
-            <div
-                style={{
-                    padding: '1rem',
-                    backgroundColor: 'red',
-                    display: 'flex',
-                    flexDirection: 'row',
-                    gap: '1rem',
-                }}
-            >
-                <button>
+        <MessageBase
+            heading={restProps.data.heading}
+            content={restProps.data.content}
+            hideControls={false}
+        >
+            <div className={styles.footer}>
+                <MessageResponse
+                    handleId="a"
+                    handlePosition={Position.Bottom}
+                    handleType="source"
+                >
                     No Response
-                    <Handle type="source" position={Position.Bottom} id="a" />
-                </button>
-                <button>
+                </MessageResponse>
+                <MessageResponse
+                    handleId="b"
+                    handlePosition={Position.Bottom}
+                    handleType="source"
+                >
                     A
-                    <Handle type="source" position={Position.Bottom} id="b" />
-                </button>
-                <button>
+                </MessageResponse>
+                <MessageResponse
+                    handleId="c"
+                    handlePosition={Position.Bottom}
+                    handleType="source"
+                >
                     B
-                    <Handle type="source" position={Position.Bottom} id="c" />
-                </button>
-                <button>
-                    C
-                    <Handle type="source" position={Position.Bottom} id="d" />
-                </button>
+                </MessageResponse>
             </div>
         </MessageBase>
     )
 }
 
-export default MessageNR
+export default memo(MessageNR)

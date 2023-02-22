@@ -20,7 +20,9 @@ function App() {
             <ReactFlowProvider>
                 <Skeleton ref={skeletonRef}>
                     <ReactFlow
-                        skeletonRef={skeletonRef as MutableRefObject<HTMLElement>}
+                        skeletonRef={
+                            skeletonRef as MutableRefObject<HTMLElement>
+                        }
                     >
                         <Background />
                         <InteractiveControls />

@@ -3,19 +3,17 @@ import { createContext, DragEvent, useContext } from 'react'
 import { ReactFlowProvider as ReactFlowProviderOriginal } from 'reactflow'
 
 import { addNode, setMoveEffect } from '@/utils/ReactFlow'
-import { IMessageType } from '../MessageList'
+import { IMessage } from '../MessageList'
 
 type ReactFlowState = {
-    addMessage: (event: DragEvent<HTMLElement>, nodeType: IMessageType) => void
+    addMessage: (event: DragEvent<HTMLElement>, message: IMessage) => void
 }
 
 const ReactFlowContext = createContext<ReactFlowState>({} as ReactFlowState)
 
-export function ReactFlowProvider({
-    children
-}: { children: JSX.Element }) {
-    const addMessage = (event: DragEvent<HTMLElement>, nodeType: IMessageType) => {
-        addNode(event, nodeType)
+export function ReactFlowProvider({ children }: { children: JSX.Element }) {
+    const addMessage = (event: DragEvent<HTMLElement>, message: IMessage) => {
+        addNode(event, message)
         setMoveEffect(event)
     }
 

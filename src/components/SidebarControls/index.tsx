@@ -5,6 +5,7 @@ import classNames from 'classnames'
 import HamburgerIcon from '@/assets/icons/hamburger.svg'
 
 import styles from './index.module.scss'
+import { useIsOverflow } from '@/hooks/useIsOverflow'
 
 const SidebarControls: React.FC<{} & JSX.IntrinsicElements['div']> = (
     props
@@ -12,6 +13,8 @@ const SidebarControls: React.FC<{} & JSX.IntrinsicElements['div']> = (
     const [collapsed, setCollapsed] = useState(false)
 
     const sidebarRef = useRef<HTMLDivElement>(null) as RefObject<HTMLElement>
+
+    const sidebarRefHasOverflow = useIsOverflow(sidebarRef)
 
     const { y: sidebarScrollY } = useScroll(sidebarRef)
 
@@ -39,7 +42,7 @@ const SidebarControls: React.FC<{} & JSX.IntrinsicElements['div']> = (
             className={sidebarClasses}
             {...props}
         >
-            <span className={sidebarSpanClasses} />
+            {sidebarRefHasOverflow && <span className={sidebarSpanClasses} />}
             <div className={headClasses}>
                 <h1>Library</h1>
                 <button

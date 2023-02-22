@@ -1,13 +1,13 @@
-import { IMessageType } from '@/providers/MessageList'
+import { IMessage } from '@/providers/MessageList'
 import { BaseSyntheticEvent, DragEvent, MutableRefObject } from 'react'
-import { Node, ReactFlowInstance, useReactFlow } from 'reactflow'
+import { Node, ReactFlowInstance } from 'reactflow'
 
 const reactFlowKey = 'application/reactflow'
 
 const reactFlowPaneKey = 'react-flow__pane'
 
-const getNodeType = (event: DragEvent<HTMLElement>) => {
-    return event.dataTransfer.getData(reactFlowKey)
+const getNodeData = (event: DragEvent<HTMLElement>) => {
+    return JSON.parse(event.dataTransfer.getData(reactFlowKey)) as IMessage
 }
 
 const getNodeUID = () => {
@@ -38,11 +38,17 @@ const getNodeStructure = (
     bounds: DOMRect,
     event: DragEvent<HTMLElement>
 ) => {
+    const data = getNodeData(event)
     return {
         id: getNodeUID().toString(),
-        type: getNodeType(event),
+        type: data.type,
         position: getNodePosition(instance, bounds, event),
-        data: { label: `${getNodeType(event)} node` },
+        data: {
+            label: `${data.type} testing`,
+            heading: data.heading,
+            content: data.content,
+            type: data.type,
+        },
     }
 }
 
@@ -50,8 +56,9 @@ export const getNode = (
     event: DragEvent<HTMLElement>,
     ref: MutableRefObject<HTMLElement>,
     instance: ReactFlowInstance<any, any>
-): Node<{ label: string }, string> | undefined => {
-    const type = getNodeType(event)
+): Node<IMessage, string> | undefined => {
+    const data = getNodeData(event)
+    const type = data.type
     if (isDroppedElementInvalid(type)) {
         return undefined
     }
@@ -66,11 +73,8 @@ export const setMoveEffect = (event: DragEvent<HTMLElement>) => {
     event.dataTransfer.dropEffect = 'move'
 }
 
-export const addNode = (
-    event: DragEvent<HTMLElement>,
-    nodeType: IMessageType
-) => {
-    event.dataTransfer.setData(reactFlowKey, nodeType)
+export const addNode = (event: DragEvent<HTMLElement>, message: IMessage) => {
+    event.dataTransfer.setData(reactFlowKey, JSON.stringify(message))
 }
 
 export const isNodeInPane = (event: BaseSyntheticEvent<HTMLElement>) => {

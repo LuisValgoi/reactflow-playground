@@ -1,5 +1,6 @@
 import React, {
     DragEvent,
+    memo,
     MutableRefObject,
     useCallback,
     useMemo,
@@ -7,7 +8,6 @@ import React, {
 } from 'react'
 
 import {
-    NodeTypes,
     addEdge,
     Connection,
     Node,
@@ -22,13 +22,14 @@ import { getNode, isNodeInPane, setMoveEffect } from '@/utils/ReactFlow'
 import MessageNR from '@/components/MessageNR'
 
 import 'reactflow/dist/style.css'
+import { IMessage } from '@/providers/MessageList'
 
 const HIDE_REACT_FLOW_WATERMARK = true
 
 const ReactFlow: React.FC<
     ReactFlowProps & { skeletonRef: MutableRefObject<HTMLElement> }
 > = ({ children, skeletonRef, ...rest }) => {
-    const [nodes, setNodes, onNodesChange] = useNodesState([])
+    const [nodes, setNodes, onNodesChange] = useNodesState<IMessage>([])
     const [edges, setEdges, onEdgesChange] = useEdgesState([])
     const [instance, setInstance] = useState<any>()
     const nodeTypes = useMemo(() => ({ messageNR: MessageNR as any }), [])
@@ -74,4 +75,4 @@ const ReactFlow: React.FC<
     )
 }
 
-export default ReactFlow
+export default memo(ReactFlow)

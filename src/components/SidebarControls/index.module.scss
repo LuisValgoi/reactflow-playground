@@ -18,7 +18,6 @@
         display: none;
     }
 
-    width: 400px;
     max-height: calc(100vh - 120px);
     position: fixed;
     z-index: 4;
@@ -49,9 +48,11 @@
         height: 100%;
         pointer-events: none;
 
-        background-image: linear-gradient(to bottom, 
-        rgba(255, 255, 255, 0) 75%,
-         rgba(255, 255, 255, 0.9) 100%);
+        background-image: linear-gradient(
+            to bottom,
+            rgba(255, 255, 255, 0) 75%,
+            rgba(255, 255, 255, 0.9) 100%
+        );
     }
 
     & .sidebarControlsHead {
@@ -79,7 +80,8 @@
         border-radius: 0.5rem;
         cursor: pointer;
 
-        &:focus,:active {
+        &:focus,
+        :active {
             outline: lightgrey solid 2px;
         }
 

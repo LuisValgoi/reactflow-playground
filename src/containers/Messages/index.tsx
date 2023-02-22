@@ -17,12 +17,12 @@ const Messages: React.FC = () => {
                 <MessageBase
                     as="li"
                     draggable
-                    onDragStart={(event: DragEvent<HTMLLIElement>) =>
-                        addMessage(event, message.type)
-                    }
-                    key={message.title}
-                    heading={message.title}
+                    key={message.heading}
+                    heading={message.heading}
                     content={message.content}
+                    onDragStart={(event: DragEvent<HTMLLIElement>) =>
+                        addMessage(event, message)
+                    }
                 />
             ))}
         </ul>
