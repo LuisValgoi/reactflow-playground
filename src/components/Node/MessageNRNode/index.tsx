@@ -2,43 +2,46 @@ import { IMessage } from '@/providers/MessageList'
 import React, { memo } from 'react'
 import { Node, Position } from 'reactflow'
 
-import MessageBase from '@/components/MessageBase'
-import MessageResponse from '@/components/MessageResponseButton'
+import MessageBaseNode from '@/components/Node/MessageBaseNode'
+import MessageFooterResponseButton from '@/components/NodeControl/MessageFooterResponseButton'
 
 import styles from './index.module.scss'
 
-const MessageNR: React.FC<Node<IMessage>> = ({ ...restProps }) => {
+type IMessageNRNode = Node<IMessage>
+
+const MessageNRNode: React.FC<IMessageNRNode> = ({ ...restProps }) => {
     return (
-        <MessageBase
+        <MessageBaseNode
             heading={restProps.data.heading}
             content={restProps.data.content}
+            selected={restProps.selected}
             hideControls={false}
         >
             <div className={styles.footer}>
-                <MessageResponse
+                <MessageFooterResponseButton
                     handleId="a"
                     handlePosition={Position.Bottom}
                     handleType="source"
                 >
                     No Response
-                </MessageResponse>
-                <MessageResponse
+                </MessageFooterResponseButton>
+                <MessageFooterResponseButton
                     handleId="b"
                     handlePosition={Position.Bottom}
                     handleType="source"
                 >
                     A
-                </MessageResponse>
-                <MessageResponse
+                </MessageFooterResponseButton>
+                <MessageFooterResponseButton
                     handleId="c"
                     handlePosition={Position.Bottom}
                     handleType="source"
                 >
                     B
-                </MessageResponse>
+                </MessageFooterResponseButton>
             </div>
-        </MessageBase>
+        </MessageBaseNode>
     )
 }
 
-export default memo(MessageNR)
+export default memo(MessageNRNode)

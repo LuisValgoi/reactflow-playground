@@ -1,6 +1,6 @@
 import React, { DragEvent } from 'react'
 
-import MessageBase from '@/components/MessageBase'
+import MessageBaseNode from '@/components/Node/MessageBaseNode'
 
 import { useMessageList } from '@/providers/MessageList'
 import { useReactFlow } from '@/providers/ReactFlow'
@@ -14,7 +14,7 @@ const Messages: React.FC = () => {
     return (
         <ul className={styles.list}>
             {messages.map((message) => (
-                <MessageBase
+                <MessageBaseNode
                     as="li"
                     draggable
                     key={message.heading}

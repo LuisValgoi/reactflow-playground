@@ -18,11 +18,10 @@ import {
 } from 'reactflow'
 
 import { getNode, isNodeInPane, setMoveEffect } from '@/utils/ReactFlow'
-
-import MessageNR from '@/components/MessageNR'
+import MessageNR from '@/components/Node/MessageNRNode'
+import { IMessage } from '@/providers/MessageList'
 
 import 'reactflow/dist/style.css'
-import { IMessage } from '@/providers/MessageList'
 
 const HIDE_REACT_FLOW_WATERMARK = true
 
