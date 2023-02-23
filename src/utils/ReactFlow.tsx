@@ -28,7 +28,7 @@ const getNodePosition = (
     event: DragEvent<HTMLElement>
 ) => {
     return instance.project({
-        x: event.clientX - bounds.left,
+        x: (event.clientX - 350) - bounds.left,
         y: event.clientY - bounds.top,
     })
 }
