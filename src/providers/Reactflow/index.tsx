@@ -1,6 +1,7 @@
 import { createContext, DragEvent, useCallback, useContext } from 'react'
 
 import {
+    ReactFlowInstance,
     ReactFlowProvider as ReactFlowProviderOriginal,
     useReactFlow as useReactFlowOriginal,
 } from 'reactflow'
@@ -11,7 +12,7 @@ import { IMessage } from '@/interfaces'
 type ReactFlowState = {
     addMessage: (event: DragEvent<HTMLElement>, message: IMessage) => void
     removeMessage: (nodeId: string) => void
-}
+} & ReactFlowInstance<any, any>
 
 const ReactFlowContext = createContext<ReactFlowState>({} as ReactFlowState)
 
@@ -24,7 +25,7 @@ export function ReactFlowProvider({ children }: { children: JSX.Element }) {
 }
 
 function ReactFlowProviderCustom({ children }: { children: JSX.Element }) {
-    const { deleteElements } = useReactFlowOriginal()
+    const { ...rest } = useReactFlowOriginal()
 
     const addMessage = useCallback(
         (event: DragEvent<HTMLElement>, message: IMessage) => {
@@ -35,11 +36,13 @@ function ReactFlowProviderCustom({ children }: { children: JSX.Element }) {
     )
 
     const removeMessage = useCallback((nodeId: string) => {
-        deleteElements({ nodes: [{ id: nodeId }] })
+        rest.deleteElements({ nodes: [{ id: nodeId }] })
     }, [])
 
     return (
-        <ReactFlowContext.Provider value={{ addMessage, removeMessage }}>
+        <ReactFlowContext.Provider
+            value={{ ...rest, addMessage, removeMessage }}
+        >
             {children}
         </ReactFlowContext.Provider>
     )
@@ -52,6 +55,6 @@ export function useReactFlow() {
         throw new Error('hook must be used within a provider')
     }
 
-    const { addMessage, removeMessage } = context
-    return { addMessage, removeMessage }
+    const { addMessage, removeMessage, ...rest } = context
+    return { addMessage, removeMessage, ...rest }
 }
