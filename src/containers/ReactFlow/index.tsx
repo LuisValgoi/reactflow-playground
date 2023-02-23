@@ -25,9 +25,15 @@ import 'reactflow/dist/style.css'
 
 const HIDE_REACT_FLOW_WATERMARK = true
 
-const ReactFlow: React.FC<
-    ReactFlowProps & { skeletonRef: MutableRefObject<HTMLElement> }
-> = ({ children, skeletonRef, ...rest }) => {
+type IReactFlowProps = ReactFlowProps & {
+    skeletonRef: MutableRefObject<HTMLElement>
+}
+
+const ReactFlow: React.FC<IReactFlowProps> = ({
+    children,
+    skeletonRef,
+    ...rest
+}) => {
     const [nodes, setNodes, onNodesChange] = useNodesState<IMessage>([])
     const [edges, setEdges, onEdgesChange] = useEdgesState([])
     const [instance, setInstance] = useState<any>()

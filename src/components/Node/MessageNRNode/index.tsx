@@ -12,6 +12,7 @@ type IMessageNRNode = Node<IMessage>
 const MessageNRNode: React.FC<IMessageNRNode> = ({ ...restProps }) => {
     return (
         <MessageBaseNode
+            id={restProps.id}
             heading={restProps.data.heading}
             content={restProps.data.content}
             selected={restProps.selected}

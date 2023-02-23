@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { memo, useCallback } from 'react'
 import classNames from 'classnames'
 
 import { ReactComponent as PencilIcon } from '@/assets/icons/pencil.svg'
@@ -6,8 +6,10 @@ import { ReactComponent as DeleteIcon } from '@/assets/icons/trash.svg'
 
 import styles from './index.module.scss'
 import MessageHeadActionButton from '../../NodeControl/MessageHeadActionButton'
+import { useReactFlow } from '@/providers/ReactFlow'
 
 type IMessageBaseNode<T extends keyof JSX.IntrinsicElements> = {
+    id: string
     heading: string
     content: string
     hideControls?: boolean
@@ -25,7 +27,7 @@ const MessageBaseNode = <T extends keyof JSX.IntrinsicElements>({
     children,
     ...restProps
 }: IMessageBaseNode<T>) => {
-    const Component = as
+    const { removeMessage } = useReactFlow()
 
     const containerClasses = classNames(
         styles.container,
@@ -33,10 +35,18 @@ const MessageBaseNode = <T extends keyof JSX.IntrinsicElements>({
         className
     )
 
+    const Component = as
+
     const validProps = restProps as Omit<
         typeof restProps,
         keyof IMessageBaseNode<T>
     >
+
+    const handleDelete = useCallback(() => {
+        if (window.confirm('Are you sure you want to delete?') === true) {
+            removeMessage(restProps.id)
+        }
+    }, [])
 
     return (
         <Component tabIndex={0} className={containerClasses} {...validProps}>
@@ -48,6 +58,7 @@ const MessageBaseNode = <T extends keyof JSX.IntrinsicElements>({
                         <MessageHeadActionButton alt="edit" Icon={PencilIcon} />
                         <MessageHeadActionButton
                             alt="delete"
+                            onClick={handleDelete}
                             Icon={DeleteIcon}
                         />
                     </div>
