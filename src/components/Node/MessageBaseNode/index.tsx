@@ -1,8 +1,8 @@
 import { memo } from 'react'
 import classNames from 'classnames'
 
-import PencilIcon from '@/assets/icons/pencil.svg'
-import DeleteIcon from '@/assets/icons/trash.svg'
+import { ReactComponent as PencilIcon } from '@/assets/icons/pencil.svg'
+import { ReactComponent as DeleteIcon } from '@/assets/icons/trash.svg'
 
 import styles from './index.module.scss'
 import MessageHeadActionButton from '../../NodeControl/MessageHeadActionButton'
@@ -45,10 +45,10 @@ const MessageBaseNode = <T extends keyof JSX.IntrinsicElements>({
 
                 {!hideControls && (
                     <div className={styles.headActions}>
-                        <MessageHeadActionButton alt="edit" icon={PencilIcon} />
+                        <MessageHeadActionButton alt="edit" Icon={PencilIcon} />
                         <MessageHeadActionButton
                             alt="delete"
-                            icon={DeleteIcon}
+                            Icon={DeleteIcon}
                         />
                     </div>
                 )}

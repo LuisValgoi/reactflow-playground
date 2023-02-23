@@ -4,12 +4,12 @@ import React, { memo } from 'react'
 import styles from './index.module.scss'
 
 type IMessageHeadActionButton = {
-    icon: string
+    Icon: React.FC<React.SVGProps<SVGSVGElement>>
     alt: string
 } & JSX.IntrinsicElements['button']
 
 const MessageHeadActionButton: React.FC<IMessageHeadActionButton> = ({
-    icon,
+    Icon,
     alt,
     ...restProps
 }) => {
@@ -20,7 +20,7 @@ const MessageHeadActionButton: React.FC<IMessageHeadActionButton> = ({
             className={classNames(styles.icon, 'nodrag')}
             {...restProps}
         >
-            <img src={icon} alt={alt} />
+            {<Icon />}
         </button>
     )
 }

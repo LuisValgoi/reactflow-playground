@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Controls as ControlsRF, ControlButton, PanelPosition } from 'reactflow'
 
-import WarningIcon from '@/assets/icons/warning.svg'
+import { ReactComponent as WarningIcon } from '@/assets/icons/warning.svg'
 
-import MessageIcon from '@/assets/icons/message.svg'
+import { ReactComponent as MessageIcon } from '@/assets/icons/message.svg'
 
 import styles from './index.module.scss'
 
@@ -22,10 +22,10 @@ const InteractiveControls: React.FC = () => {
             className={styles.controlsContainer}
         >
             <ControlButton onClick={() => alert('pressed on warning icon')}>
-                <img src={WarningIcon} alt="Warning Icon" />
+                <WarningIcon aria-label="Warning Icon" />
             </ControlButton>
             <ControlButton onClick={() => alert('pressed on message icon')}>
-                <img src={MessageIcon} alt="Message Icon" />
+                <MessageIcon aria-label="Message Icon" />
             </ControlButton>
         </ControlsRF>
     )

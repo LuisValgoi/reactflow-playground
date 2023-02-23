@@ -2,7 +2,7 @@ import React, { useRef, useState, LegacyRef, RefObject } from 'react'
 import { useScroll } from 'react-use'
 import classNames from 'classnames'
 
-import HamburgerIcon from '@/assets/icons/hamburger.svg'
+import { ReactComponent as HamburgerIcon } from '@/assets/icons/hamburger.svg'
 
 import styles from './index.module.scss'
 import { useIsOverflow } from '@/hooks/useIsOverflow'
@@ -50,7 +50,7 @@ const SidebarControls: React.FC<{} & JSX.IntrinsicElements['div']> = (
                     className={toggleClasses}
                     onClick={() => setCollapsed(!collapsed)}
                 >
-                    <img src={HamburgerIcon} alt="menu" />
+                    <HamburgerIcon aria-label="menu" />
                 </button>
             </div>
             <div className={childrenClasses}>{props.children}</div>
