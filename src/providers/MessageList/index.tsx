@@ -1,16 +1,5 @@
+import { IMessage, IMessageListState } from '@/interfaces'
 import { createContext, useContext } from 'react'
-
-export type IMessageType = 'input' | 'output' | 'default' | 'messageNR'
-
-export type IMessage = {
-    heading: string
-    content: string
-    type: IMessageType
-}
-
-export type IMessageListState = {
-    messages: IMessage[]
-}
 
 const MessageListContext = createContext<IMessageListState>(
     {} as IMessageListState

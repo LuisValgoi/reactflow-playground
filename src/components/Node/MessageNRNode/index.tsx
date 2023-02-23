@@ -1,4 +1,4 @@
-import { IMessage } from '@/providers/MessageList'
+import { IMessage } from '@/interfaces'
 import React, { memo } from 'react'
 import { Node, Position } from 'reactflow'
 

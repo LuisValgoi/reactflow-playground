@@ -1,4 +1,4 @@
-import { IMessage } from '@/providers/MessageList'
+import { IMessage } from '@/interfaces'
 import { BaseSyntheticEvent, DragEvent, MutableRefObject } from 'react'
 import { Node, ReactFlowInstance } from 'reactflow'
 

@@ -19,7 +19,7 @@ import {
 
 import { getNode, isNodeInPane, setMoveEffect } from '@/utils/ReactFlow'
 import MessageNR from '@/components/Node/MessageNRNode'
-import { IMessage } from '@/providers/MessageList'
+import { IMessage } from '@/interfaces'
 
 import 'reactflow/dist/style.css'
 
