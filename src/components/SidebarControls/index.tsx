@@ -2,10 +2,11 @@ import React, { useRef, useState, LegacyRef, RefObject } from 'react'
 import { useScroll } from 'react-use'
 import classNames from 'classnames'
 
+import { useIsOverflow } from '@/hooks/useIsOverflow'
+
 import { ReactComponent as HamburgerIcon } from '@/assets/icons/hamburger.svg'
 
 import styles from './index.module.scss'
-import { useIsOverflow } from '@/hooks/useIsOverflow'
 
 const SidebarControls: React.FC<{} & JSX.IntrinsicElements['div']> = (
     props

@@ -2,7 +2,6 @@ import React from 'react'
 import { Controls as ControlsRF, ControlButton, PanelPosition } from 'reactflow'
 
 import { ReactComponent as WarningIcon } from '@/assets/icons/warning.svg'
-
 import { ReactComponent as MessageIcon } from '@/assets/icons/message.svg'
 
 import styles from './index.module.scss'

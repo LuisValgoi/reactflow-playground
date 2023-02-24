@@ -1,8 +1,9 @@
 import React, { DragEvent, useCallback } from 'react'
 
+import { IMessage } from '@/interfaces'
+
 import MessageBaseNode from '@/components/Node/MessageBaseNode'
 
-import { IMessage } from '@/interfaces'
 import { useMessageList } from '@/providers/MessageList'
 import { useReactFlow } from '@/providers/ReactFlow'
 
@@ -10,11 +11,11 @@ import styles from './index.module.scss'
 
 const Messages: React.FC = () => {
     const { messages } = useMessageList()
-    const { addMessage } = useReactFlow()
+    const { addNode } = useReactFlow()
 
     const handleOnDragStart = useCallback(
         (event: DragEvent<HTMLLIElement>, message: IMessage) => {
-            addMessage(event, message)
+            addNode(event, message)
         },
         []
     )

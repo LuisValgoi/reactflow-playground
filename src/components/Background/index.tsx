@@ -1,10 +1,10 @@
+import React from 'react'
+
 import {
     Background as BgReactFlow,
     BackgroundProps,
     BackgroundVariant,
 } from 'reactflow'
-
-import React from 'react'
 
 const Background: React.FC<BackgroundProps> = (props) => {
     return (

@@ -5,6 +5,7 @@ import InteractiveControls from '@/components/InteractiveControls'
 import SidebarControls from '@/components/SidebarControls'
 import SearchMessage from '@/components/SearchMessage'
 import Skeleton from '@/components/Skeleton'
+import TopbarControls from './components/TopbarControls'
 
 import { MessageListProvider } from '@/providers/MessageList'
 import { ReactFlowProvider } from '@/providers/ReactFlow'
@@ -26,6 +27,7 @@ function App() {
                     >
                         <Background />
                         <InteractiveControls />
+                        <TopbarControls />
                         <SidebarControls>
                             <SearchMessage />
                             <Messages />

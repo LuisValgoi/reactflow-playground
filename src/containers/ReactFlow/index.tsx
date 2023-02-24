@@ -6,7 +6,6 @@ import React, {
     useMemo,
     useState,
 } from 'react'
-
 import {
     addEdge,
     Connection,
@@ -17,9 +16,11 @@ import {
     useNodesState,
 } from 'reactflow'
 
-import { getNode, isNodeInPane, setMoveEffect } from '@/utils/ReactFlow'
-import MessageNR from '@/components/Node/MessageNRNode'
 import { IMessage } from '@/interfaces'
+
+import { getNode, isNodeInPane, setMoveEffect } from '@/utils/ReactFlow'
+
+import MessageNR from '@/components/Node/MessageNRNode'
 
 import 'reactflow/dist/style.css'
 

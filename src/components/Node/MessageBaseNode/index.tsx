@@ -4,9 +4,11 @@ import classNames from 'classnames'
 import { ReactComponent as PencilIcon } from '@/assets/icons/pencil.svg'
 import { ReactComponent as DeleteIcon } from '@/assets/icons/trash.svg'
 
-import styles from './index.module.scss'
-import MessageHeadActionButton from '../../NodeControl/MessageHeadActionButton'
 import { useReactFlow } from '@/providers/ReactFlow'
+
+import MessageHeadActionButton from '@/components/NodeControl/MessageHeadActionButton'
+
+import styles from './index.module.scss'
 
 type IMessageBaseNode<T extends keyof JSX.IntrinsicElements> = {
     id: string
@@ -27,7 +29,7 @@ const MessageBaseNode = <T extends keyof JSX.IntrinsicElements>({
     children,
     ...restProps
 }: IMessageBaseNode<T>) => {
-    const { removeMessage } = useReactFlow()
+    const { removeNode } = useReactFlow()
 
     const containerClasses = classNames(
         styles.container,
@@ -44,7 +46,7 @@ const MessageBaseNode = <T extends keyof JSX.IntrinsicElements>({
 
     const handleDelete = useCallback(() => {
         if (window.confirm('Are you sure you want to delete?') === true) {
-            removeMessage(restProps.id)
+            removeNode(restProps.id)
         }
     }, [])
 

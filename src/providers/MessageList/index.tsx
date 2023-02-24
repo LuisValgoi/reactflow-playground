@@ -1,5 +1,6 @@
-import { IMessage, IMessageListState } from '@/interfaces'
 import { createContext, useContext } from 'react'
+
+import { IMessage, IMessageListState } from '@/interfaces'
 
 const MessageListContext = createContext<IMessageListState>(
     {} as IMessageListState

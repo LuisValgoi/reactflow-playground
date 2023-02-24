@@ -1,17 +1,17 @@
 import { createContext, DragEvent, useCallback, useContext } from 'react'
-
 import {
     ReactFlowInstance,
     ReactFlowProvider as ReactFlowProviderOriginal,
     useReactFlow as useReactFlowOriginal,
 } from 'reactflow'
 
-import { addNode, setMoveEffect } from '@/utils/ReactFlow'
 import { IMessage } from '@/interfaces'
 
+import { addNode as addNodeUtils, setMoveEffect } from '@/utils/ReactFlow'
+
 type ReactFlowState = {
-    addMessage: (event: DragEvent<HTMLElement>, message: IMessage) => void
-    removeMessage: (nodeId: string) => void
+    addNode: (event: DragEvent<HTMLElement>, message: IMessage) => void
+    removeNode: (nodeId: string) => void
 } & ReactFlowInstance<any, any>
 
 const ReactFlowContext = createContext<ReactFlowState>({} as ReactFlowState)
@@ -27,21 +27,21 @@ export function ReactFlowProvider({ children }: { children: JSX.Element }) {
 function ReactFlowProviderCustom({ children }: { children: JSX.Element }) {
     const { ...rest } = useReactFlowOriginal()
 
-    const addMessage = useCallback(
+    const addNode = useCallback(
         (event: DragEvent<HTMLElement>, message: IMessage) => {
-            addNode(event, message)
+            addNodeUtils(event, message)
             setMoveEffect(event)
         },
         []
     )
 
-    const removeMessage = useCallback((nodeId: string) => {
+    const removeNode = useCallback((nodeId: string) => {
         rest.deleteElements({ nodes: [{ id: nodeId }] })
     }, [])
 
     return (
         <ReactFlowContext.Provider
-            value={{ ...rest, addMessage, removeMessage }}
+            value={{ ...rest, addNode, removeNode }}
         >
             {children}
         </ReactFlowContext.Provider>
@@ -55,6 +55,6 @@ export function useReactFlow() {
         throw new Error('hook must be used within a provider')
     }
 
-    const { addMessage, removeMessage, ...rest } = context
-    return { addMessage, removeMessage, ...rest }
+    const { addNode, removeNode, ...rest } = context
+    return { addNode, removeNode, ...rest }
 }
