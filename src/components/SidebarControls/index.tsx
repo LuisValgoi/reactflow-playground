@@ -4,6 +4,10 @@ import classNames from 'classnames'
 
 import { useIsOverflow } from '@/hooks/useIsOverflow'
 
+import Messages from '@/containers/Messages'
+
+import SearchMessage from '@/components/SearchMessage'
+
 import { ReactComponent as HamburgerIcon } from '@/assets/icons/hamburger.svg'
 
 import styles from './index.module.scss'
@@ -54,7 +58,10 @@ const SidebarControls: React.FC<{} & JSX.IntrinsicElements['div']> = (
                     <HamburgerIcon aria-label="menu" />
                 </button>
             </div>
-            <div className={childrenClasses}>{props.children}</div>
+            <div className={childrenClasses}>
+                <SearchMessage />
+                <Messages />
+            </div>
         </div>
     )
 }

@@ -1,0 +1,28 @@
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+
+.input {
+    position: relative;
+    border: 1px solid lightgrey;
+    padding: 0.5rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    outline: lightgrey solid 1px;
+    margin-left: 0.5rem;
+
+    &::placeholder {
+        color: lightgrey;
+        font-style: italic;
+    }
+
+    &:focus,
+    :active {
+        outline: lightgrey solid 2px;
+    }
+}

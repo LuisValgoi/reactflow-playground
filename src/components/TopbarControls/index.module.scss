@@ -1,0 +1,46 @@
+.wrapper {
+    position: absolute;
+    z-index: 4;
+    top: 1rem;
+    left: calc(50% - 1000px / 2);
+    width: 1000px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.5rem;
+    background-color: white;
+    border-radius: 0.5rem;
+    filter: drop-shadow(0px 2px 10px rgba(0, 0, 0, 0.1));
+    padding: 1rem;
+    align-items: center;
+
+    & p {
+        margin: 0;
+    }
+}
+
+.button {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+        'Lucida Sans', Arial, sans-serif;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: unset;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.5s ease;
+    padding: 0.5rem;
+
+    &:hover {
+        transform: scale(1.1);
+        background-color: #f4f4f4;
+    }
+
+    &:active {
+        transform: scale(0.95);
+    }
+}

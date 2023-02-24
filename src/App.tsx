@@ -3,15 +3,13 @@ import { MutableRefObject, useRef } from 'react'
 import Background from '@/components/Background'
 import InteractiveControls from '@/components/InteractiveControls'
 import SidebarControls from '@/components/SidebarControls'
-import SearchMessage from '@/components/SearchMessage'
 import Skeleton from '@/components/Skeleton'
-import TopbarControls from './components/TopbarControls'
+import TopBarControls from '@/components/TopBarControls'
 
 import { MessageListProvider } from '@/providers/MessageList'
 import { ReactFlowProvider } from '@/providers/ReactFlow'
 
 import ReactFlow from '@/containers/ReactFlow'
-import Messages from '@/containers/Messages'
 
 function App() {
     const skeletonRef = useRef<HTMLElement>(null)
@@ -27,10 +25,8 @@ function App() {
                     >
                         <Background />
                         <InteractiveControls />
-                        <TopbarControls />
+                        <TopBarControls />
                         <SidebarControls>
-                            <SearchMessage />
-                            <Messages />
                         </SidebarControls>
                     </ReactFlow>
                 </Skeleton>
