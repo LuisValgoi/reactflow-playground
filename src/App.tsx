@@ -1,4 +1,5 @@
-import { MutableRefObject, useRef } from 'react'
+import { useRef } from 'react'
+import { ReactFlowProvider } from 'reactflow'
 
 import Background from '@/components/Background'
 import InteractiveControls from '@/components/InteractiveControls'
@@ -7,31 +8,25 @@ import Skeleton from '@/components/Skeleton'
 import TopBarControls from '@/components/TopBarControls'
 
 import { AppProvider } from '@/providers/AppProvider'
-import { ReactFlowProvider } from '@/providers/ReactFlow'
 
-import ReactFlow from '@/containers/ReactFlow'
+import ReactFlowContainer from '@/containers/ReactFlowContainer'
 
 function App() {
     const skeletonRef = useRef<HTMLElement>(null)
 
     return (
-        <AppProvider>
-            <ReactFlowProvider>
+        <ReactFlowProvider>
+            <AppProvider>
                 <Skeleton ref={skeletonRef}>
-                    <ReactFlow
-                        skeletonRef={
-                            skeletonRef as MutableRefObject<HTMLElement>
-                        }
-                    >
+                    <ReactFlowContainer skeletonRef={skeletonRef}>
                         <Background />
                         <InteractiveControls />
                         <TopBarControls />
-                        <SidebarControls>
-                        </SidebarControls>
-                    </ReactFlow>
+                        <SidebarControls></SidebarControls>
+                    </ReactFlowContainer>
                 </Skeleton>
-            </ReactFlowProvider>
-        </AppProvider>
+            </AppProvider>
+        </ReactFlowProvider>
     )
 }
 

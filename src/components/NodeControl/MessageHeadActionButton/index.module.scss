@@ -2,12 +2,19 @@
     border: unset;
     border-radius: 50%;
     padding: 0.5rem;
-    background-color: rgb(236, 236, 236);
+    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 
     &:hover {
-        background-color: darkgray;
+        background-color: #f4f4f4;
+    }
+
+    & svg {
+        & path {
+            fill: #5f6ac4;
+        }
     }
 }

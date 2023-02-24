@@ -1,9 +1,11 @@
+import { useApp } from '@/providers/AppProvider'
 import React, { useCallback, useState } from 'react'
 
 import styles from './index.module.scss'
 
 const EditableCanvasName: React.FC = () => {
-    const [canvasName, setCanvasName] = useState('Gap in Care')
+    const { canvasName, setCanvasName } = useApp()
+
     const [shownInput, setShowInput] = useState(false)
 
     const handleTextDoubleClickName = useCallback(() => {

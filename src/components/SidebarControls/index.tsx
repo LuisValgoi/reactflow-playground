@@ -23,10 +23,6 @@ const SidebarControls: React.FC<{} & JSX.IntrinsicElements['div']> = (
 
     const { y: sidebarScrollY } = useScroll(sidebarRef)
 
-    const sidebarClasses = classNames(styles.sidebarControls, {
-        [styles.sidebarCollapsed]: collapsed,
-    })
-
     const sidebarSpanClasses = classNames({
         [styles.sidebarControlsLayer]: sidebarScrollY === 0,
     })
@@ -44,7 +40,7 @@ const SidebarControls: React.FC<{} & JSX.IntrinsicElements['div']> = (
     return (
         <div
             ref={sidebarRef as LegacyRef<HTMLDivElement> | undefined}
-            className={sidebarClasses}
+            className={styles.sidebarControls}
             {...props}
         >
             {sidebarRefHasOverflow && <span className={sidebarSpanClasses} />}

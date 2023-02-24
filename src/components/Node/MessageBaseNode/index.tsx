@@ -4,11 +4,10 @@ import classNames from 'classnames'
 import { ReactComponent as PencilIcon } from '@/assets/icons/pencil.svg'
 import { ReactComponent as DeleteIcon } from '@/assets/icons/trash.svg'
 
-import { useReactFlow } from '@/providers/ReactFlow'
-
 import MessageHeadActionButton from '@/components/NodeControl/MessageHeadActionButton'
 
 import styles from './index.module.scss'
+import { useApp } from '@/providers/AppProvider'
 
 type IMessageBaseNode<T extends keyof JSX.IntrinsicElements> = {
     id: string
@@ -29,7 +28,7 @@ const MessageBaseNode = <T extends keyof JSX.IntrinsicElements>({
     children,
     ...restProps
 }: IMessageBaseNode<T>) => {
-    const { removeNode } = useReactFlow()
+    const { removeNode } = useApp()
 
     const containerClasses = classNames(
         styles.container,

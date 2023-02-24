@@ -1,9 +1,9 @@
 .wrapper {
-    position: absolute;
     z-index: 4;
+    position: absolute;
+    width: calc(100vw - 4.5rem);
     top: 1rem;
-    left: calc(50% - 1000px / 2);
-    width: 1000px;
+    left: 1rem;
 
     display: flex;
     flex-direction: row;
@@ -42,5 +42,11 @@
 
     &:active {
         transform: scale(0.95);
+    }
+
+    & svg {
+        & path {
+            fill: #5F6AC4;
+        }
     }
 }

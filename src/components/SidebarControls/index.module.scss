@@ -32,16 +32,6 @@
     padding: 1rem;
     overflow: auto;
 
-    &.sidebarCollapsed {
-        width: fit-content;
-        height: fit-content;
-        top: 1rem;
-        padding: 0.65rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
     & .sidebarControlsLayer {
         position: fixed;
         z-index: 1;

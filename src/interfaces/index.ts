@@ -5,7 +5,3 @@ export type IMessage = {
     content: string
     type: IMessageType
 }
-
-export type IAppState = {
-    messages: IMessage[]
-}

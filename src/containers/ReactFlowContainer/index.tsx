@@ -2,6 +2,7 @@ import React, {
     DragEvent,
     memo,
     MutableRefObject,
+    RefObject,
     useCallback,
     useMemo,
     useState,
@@ -26,11 +27,11 @@ import 'reactflow/dist/style.css'
 
 const HIDE_REACT_FLOW_WATERMARK = true
 
-type IReactFlowProps = ReactFlowProps & {
-    skeletonRef: MutableRefObject<HTMLElement>
+type IReactFlowContainerProps = ReactFlowProps & {
+    skeletonRef: RefObject<HTMLElement>
 }
 
-const ReactFlow: React.FC<IReactFlowProps> = ({
+const ReactFlowContainer: React.FC<IReactFlowContainerProps> = ({
     children,
     skeletonRef,
     ...rest
@@ -56,7 +57,11 @@ const ReactFlow: React.FC<IReactFlowProps> = ({
             }
 
             event.preventDefault()
-            const newNode = getNode(event, skeletonRef, instance) as Node
+            const newNode = getNode(
+                event,
+                skeletonRef as MutableRefObject<HTMLElement>,
+                instance
+            ) as Node
             setNodes((nodes) => nodes.concat(newNode))
         },
         [instance]
@@ -82,4 +87,4 @@ const ReactFlow: React.FC<IReactFlowProps> = ({
     )
 }
 
-export default memo(ReactFlow)
+export default memo(ReactFlowContainer)
