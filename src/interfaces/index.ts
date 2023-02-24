@@ -6,6 +6,6 @@ export type IMessage = {
     type: IMessageType
 }
 
-export type IMessageListState = {
+export type IAppState = {
     messages: IMessage[]
 }

@@ -1,12 +1,10 @@
 import { createContext, useContext } from 'react'
 
-import { IMessage, IMessageListState } from '@/interfaces'
+import { IMessage, IAppState } from '@/interfaces'
 
-const MessageListContext = createContext<IMessageListState>(
-    {} as IMessageListState
-)
+const AppContext = createContext<IAppState>({} as IAppState)
 
-export function MessageListProvider({ children }: { children: JSX.Element }) {
+export function AppProvider({ children }: { children: JSX.Element }) {
     const messages: IMessage[] = [
         {
             heading: 'USER-08433-Q',
@@ -29,14 +27,14 @@ export function MessageListProvider({ children }: { children: JSX.Element }) {
     ]
 
     return (
-        <MessageListContext.Provider value={{ messages }}>
+        <AppContext.Provider value={{ messages }}>
             {children}
-        </MessageListContext.Provider>
+        </AppContext.Provider>
     )
 }
 
-export function useMessageList() {
-    const context = useContext(MessageListContext)
+export function useApp() {
+    const context = useContext(AppContext)
 
     if (!context) {
         throw new Error('hook must be used within a provider')

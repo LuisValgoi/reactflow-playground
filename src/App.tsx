@@ -6,7 +6,7 @@ import SidebarControls from '@/components/SidebarControls'
 import Skeleton from '@/components/Skeleton'
 import TopBarControls from '@/components/TopBarControls'
 
-import { MessageListProvider } from '@/providers/MessageList'
+import { AppProvider } from '@/providers/AppProvider'
 import { ReactFlowProvider } from '@/providers/ReactFlow'
 
 import ReactFlow from '@/containers/ReactFlow'
@@ -15,7 +15,7 @@ function App() {
     const skeletonRef = useRef<HTMLElement>(null)
 
     return (
-        <MessageListProvider>
+        <AppProvider>
             <ReactFlowProvider>
                 <Skeleton ref={skeletonRef}>
                     <ReactFlow
@@ -31,7 +31,7 @@ function App() {
                     </ReactFlow>
                 </Skeleton>
             </ReactFlowProvider>
-        </MessageListProvider>
+        </AppProvider>
     )
 }
 

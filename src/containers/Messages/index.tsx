@@ -4,13 +4,13 @@ import { IMessage } from '@/interfaces'
 
 import MessageBaseNode from '@/components/Node/MessageBaseNode'
 
-import { useMessageList } from '@/providers/MessageList'
+import { useApp } from '@/providers/AppProvider'
 import { useReactFlow } from '@/providers/ReactFlow'
 
 import styles from './index.module.scss'
 
 const Messages: React.FC = () => {
-    const { messages } = useMessageList()
+    const { messages } = useApp()
     const { addNode } = useReactFlow()
 
     const handleOnDragStart = useCallback(
