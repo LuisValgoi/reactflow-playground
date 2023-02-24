@@ -73,6 +73,7 @@ const ReactFlow: React.FC<IReactFlowProps> = ({
             onInit={setInstance}
             onDrop={onDrop}
             onDragOver={onDragOver}
+            deleteKeyCode={[]}
             {...rest}
         >
             {children}
