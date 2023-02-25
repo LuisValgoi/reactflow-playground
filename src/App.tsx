@@ -1,4 +1,3 @@
-import { useRef } from 'react'
 import { ReactFlowProvider } from 'reactflow'
 
 import Background from '@/components/Background'
@@ -12,17 +11,15 @@ import { AppProvider } from '@/providers/AppProvider'
 import ReactFlowContainer from '@/containers/ReactFlowContainer'
 
 function App() {
-    const skeletonRef = useRef<HTMLElement>(null)
-
     return (
         <ReactFlowProvider>
             <AppProvider>
-                <Skeleton ref={skeletonRef}>
-                    <ReactFlowContainer skeletonRef={skeletonRef}>
+                <Skeleton>
+                    <ReactFlowContainer>
                         <Background />
                         <InteractiveControls />
                         <TopBarControls />
-                        <SidebarControls></SidebarControls>
+                        <SidebarControls />
                     </ReactFlowContainer>
                 </Skeleton>
             </AppProvider>

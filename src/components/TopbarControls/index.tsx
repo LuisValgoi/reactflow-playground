@@ -6,6 +6,8 @@ import { ReactComponent as SaveIcon } from '@/assets/icons/save.svg'
 
 import EditableCanvasName from '@/components/EditableCanvasName'
 
+import { useApp } from '@/providers/AppProvider'
+
 import styles from './index.module.scss'
 
 type ITopBarControls = {} & JSX.IntrinsicElements['div']
@@ -15,6 +17,8 @@ const TopBarControls: React.FC<ITopBarControls> = ({
     children,
     ...restProps
 }) => {
+    const { saveCanvas } = useApp()
+
     const wrapperClasses = classNames(styles.wrapper, className)
 
     const buttonClasses = classNames(styles.button, className)
@@ -25,7 +29,7 @@ const TopBarControls: React.FC<ITopBarControls> = ({
 
             <EditableCanvasName />
 
-            <button className={buttonClasses}>
+            <button className={buttonClasses} tabIndex={0} onClick={saveCanvas}>
                 <SaveIcon />
                 <p>Save</p>
             </button>

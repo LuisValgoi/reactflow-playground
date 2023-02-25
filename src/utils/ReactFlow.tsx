@@ -1,5 +1,5 @@
 import { BaseSyntheticEvent, DragEvent, MutableRefObject } from 'react'
-import { Node, ReactFlowInstance } from 'reactflow'
+import { Edge, Node, ReactFlowInstance } from 'reactflow'
 
 import { IMessage } from '@/interfaces'
 
@@ -29,7 +29,7 @@ const getNodePosition = (
     event: DragEvent<HTMLElement>
 ) => {
     return instance.project({
-        x: (event.clientX - 280) - bounds.left,
+        x: event.clientX - 280 - bounds.left,
         y: event.clientY - bounds.top,
     })
 }

@@ -1,13 +1,16 @@
-import React, { forwardRef, PropsWithChildren } from 'react'
+import { useApp } from '@/providers/AppProvider'
+import React, { PropsWithChildren } from 'react'
 
 import styles from './index.module.scss'
 
-const Skeleton = forwardRef<HTMLElement, PropsWithChildren>(
-    ({ children }, ref) => (
-        <main ref={ref} className={styles.main}>
+const Skeleton: React.FC<PropsWithChildren> = ({ children }) => {
+    const { skeletonRef } = useApp()
+
+    return (
+        <main ref={skeletonRef} className={styles.main}>
             {children}
         </main>
     )
-)
+}
 
 export default Skeleton
