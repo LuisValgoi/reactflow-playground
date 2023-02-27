@@ -10,6 +10,8 @@ import { AppProvider } from '@/providers/AppProvider'
 
 import ReactFlowContainer from '@/containers/ReactFlowContainer'
 
+import './App.css';
+
 function App() {
     return (
         <ReactFlowProvider>

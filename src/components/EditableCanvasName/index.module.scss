@@ -1,20 +1,22 @@
-.wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
+.paragraph {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    min-width: 150px;
+    text-align: center;
+
+    &:hover {
+        outline: lightgrey solid 1px;
+    }
 }
 
-
 .input {
+    min-width: 150px;
     position: relative;
+    background-color: white;
     border: 1px solid lightgrey;
     padding: 0.5rem;
-    background-color: white;
     border-radius: 0.5rem;
     outline: lightgrey solid 1px;
-    margin-left: 0.5rem;
 
     &::placeholder {
         color: lightgrey;

@@ -32,27 +32,24 @@ const EditableCanvasName: React.FC = () => {
 
     if (shownInput) {
         return (
-            <div className={styles.wrapper}>
-                <p>
-                    Canvas /
-                    <input
-                        autoFocus
-                        className={styles.input}
-                        defaultValue={canvasName}
-                        onBlur={handleInputBlur}
-                        onKeyDown={handleOnKeyDown}
-                        placeholder="Type the name here..."
-                    />
-                </p>
-            </div>
+            <input
+                autoFocus
+                className={styles.input}
+                defaultValue={canvasName}
+                onBlur={handleInputBlur}
+                onKeyDown={handleOnKeyDown}
+                placeholder="Type the name here..."
+            />
         )
     }
 
     return (
         <div>
-            <p>
-                Canvas /{' '}
-                <b onDoubleClick={handleTextDoubleClickName}>{canvasName}</b>
+            <p
+                className={styles.paragraph}
+                onDoubleClick={handleTextDoubleClickName}
+            >
+                {canvasName}
             </p>
         </div>
     )
