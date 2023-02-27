@@ -32,6 +32,10 @@ const SidebarControls: React.FC<ISidebarControls> = () => {
 
     const sidebarRef = useRef<HTMLDivElement>(null) as LegacyRef<HTMLDivElement>
 
+    const sidebarClasses = classNames(styles.sidebarControls, {
+        [styles.sidebarControlsCollapsed]: collapsed,
+    })
+
     const headClasses = classNames(styles.sidebarControlsHead, {
         [styles.sidebarControlsHeadCollapsed]: collapsed,
     })
@@ -72,7 +76,7 @@ const SidebarControls: React.FC<ISidebarControls> = () => {
     }, [debouncedSearch])
 
     return (
-        <div ref={sidebarRef} className={styles.sidebarControls}>
+        <div ref={sidebarRef} className={sidebarClasses}>
             <Overlay sidebarRef={sidebarRef} />
 
             <div className={headClasses}>

@@ -33,6 +33,10 @@
     padding: 1rem;
     overflow: auto;
 
+    &.sidebarControlsCollapsed {
+        min-width: fit-content;
+    }
+
     & .sidebarControlsHead {
         display: flex;
         flex-direction: row;
