@@ -1,0 +1,15 @@
+.sidebarControlsToggle {
+    background-color: white;
+    border: unset;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+
+    &:active {
+        outline: #969cc7 solid 2px;
+    }
+
+    &:hover {
+        background-color: #f4f4f4;
+    }
+}

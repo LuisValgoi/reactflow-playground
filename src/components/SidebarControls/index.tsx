@@ -1,59 +1,41 @@
 import React, { useRef, useState, LegacyRef, RefObject } from 'react'
-import { useScroll } from 'react-use'
 import classNames from 'classnames'
-
-import { useIsOverflow } from '@/hooks/useIsOverflow'
 
 import Messages from '@/containers/Messages'
 
 import SearchMessage from '@/components/SearchMessage'
-
-import { ReactComponent as HamburgerIcon } from '@/assets/icons/hamburger.svg'
+import ToggleButton from '@/components/SidebarControls/ToggleButton'
+import Overlay from '@/components/SidebarControls/Overlay'
 
 import styles from './index.module.scss'
 
-const SidebarControls: React.FC<{} & JSX.IntrinsicElements['div']> = (
-    props
-) => {
+type ISidebarControls = {} & JSX.IntrinsicElements['div']
+
+const SidebarControls: React.FC<ISidebarControls> = () => {
     const [collapsed, setCollapsed] = useState(false)
 
-    const sidebarRef = useRef<HTMLDivElement>(null) as RefObject<HTMLElement>
-
-    const sidebarRefHasOverflow = useIsOverflow(sidebarRef)
-
-    const { y: sidebarScrollY } = useScroll(sidebarRef)
-
-    const sidebarSpanClasses = classNames({
-        [styles.sidebarControlsLayer]: sidebarScrollY === 0,
-    })
+    const sidebarRef = useRef<HTMLDivElement>(null) as LegacyRef<HTMLDivElement>
 
     const headClasses = classNames(styles.sidebarControlsHead, {
         [styles.sidebarControlsHeadCollapsed]: collapsed,
     })
-
-    const toggleClasses = classNames(styles.sidebarControlsToggle)
 
     const childrenClasses = classNames(styles.sidebarControlsChildren, {
         [styles.sidebarControlsChildrenCollapsed]: collapsed,
     })
 
     return (
-        <div
-            ref={sidebarRef as LegacyRef<HTMLDivElement> | undefined}
-            className={styles.sidebarControls}
-            {...props}
-        >
-            {sidebarRefHasOverflow && <span className={sidebarSpanClasses} />}
+        <div ref={sidebarRef} className={styles.sidebarControls}>
+            <Overlay sidebarRef={sidebarRef} />
+
             <div className={headClasses}>
                 <h1>Library</h1>
-                <button
-                    tabIndex={0}
-                    className={toggleClasses}
-                    onClick={() => setCollapsed(!collapsed)}
-                >
-                    <HamburgerIcon aria-label="menu" />
-                </button>
+                <ToggleButton
+                    collapsed={collapsed}
+                    setCollapsed={setCollapsed}
+                />
             </div>
+
             <div className={childrenClasses}>
                 <SearchMessage />
                 <Messages />
