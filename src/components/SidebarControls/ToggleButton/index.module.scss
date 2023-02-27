@@ -12,4 +12,10 @@
     &:hover {
         background-color: #f4f4f4;
     }
+
+    & svg {
+        & path {
+            fill: #5F6AC4;
+        }
+    }
 }

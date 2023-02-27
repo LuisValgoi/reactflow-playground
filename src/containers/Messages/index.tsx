@@ -8,8 +8,12 @@ import { useApp } from '@/providers/AppProvider'
 
 import styles from './index.module.scss'
 
-const Messages: React.FC = () => {
-    const { messages, addNode } = useApp()
+type IMessages = {
+    data: IMessage[]
+}
+
+const Messages: React.FC<IMessages> = ({ data }) => {
+    const { addNode } = useApp()
 
     const handleOnDragStart = useCallback(
         (event: DragEvent<HTMLLIElement>, message: IMessage) => {
@@ -20,7 +24,7 @@ const Messages: React.FC = () => {
 
     return (
         <ul className={styles.list}>
-            {messages.map((message) => (
+            {data.map((message) => (
                 <MessageBaseNode
                     id={message.heading}
                     as="li"

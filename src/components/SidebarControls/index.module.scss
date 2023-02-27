@@ -19,6 +19,7 @@
     }
 
     max-height: calc(100% - 150px);
+    min-width: calc(480px - 3rem);
     position: absolute;
     z-index: 4;
 
