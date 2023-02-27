@@ -11,17 +11,18 @@ import {
     useState,
 } from 'react'
 import { ReactFlowInstance, useReactFlow } from 'reactflow'
+import { snakeCase } from 'lodash'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { IMessage } from '@/interfaces'
 
 import { addNode as addNodeUtils, setMoveEffect } from '@/utils/ReactFlow'
-import { snakeCase, uniqueId } from 'lodash'
 
 type IAppState = {
     skeletonRef: RefObject<HTMLElement>
     messages: IMessage[]
     canvasName: string
-    reactFlowInstance: ReactFlowInstance<any, any> | undefined
+    reactFlowInstance: ReactFlowInstance | undefined
     saveCanvas: () => void
     addNode: (event: DragEvent<HTMLElement>, message: IMessage) => void
     removeNode: (nodeId: string) => void
@@ -34,18 +35,23 @@ const AppContext = createContext<IAppState>({} as IAppState)
 export function AppProvider({ children }: { children: JSX.Element }) {
     const skeletonRef = useRef<HTMLElement>(null)
 
+    const { canvasId } = useParams<{ canvasId: string }>()
+
+    const initialCanvasName = useMemo(() => canvasId || `canvas-name-${new Date().getTime()}`, [canvasId])
+
+    const navigate = useNavigate()
+
     const { deleteElements } = useReactFlow()
 
     const [rfInstance, setRfInstance] = useState<ReactFlowInstance>()
 
-    const [canvasName, setCanvasName] = useState(
-        `canvas-name-${new Date().getTime()}`
-    )
+    const [canvasName, setCanvasName] = useState(initialCanvasName)
 
     const saveCanvas = useCallback(() => {
         const canvasNameKey = snakeCase(canvasName)
         const canvasObject = rfInstance?.toObject()
         localStorage.setItem(canvasNameKey, JSON.stringify(canvasObject))
+        navigate(`/${canvasNameKey}`)
     }, [rfInstance, canvasName])
 
     const addNode = useCallback(

@@ -4,6 +4,8 @@ import '@/styles/index.css'
 
 import 'react-tooltip/dist/react-tooltip.css';
 
+import 'reactflow/dist/style.css'
+
 const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
     return <>{children}</>
 }

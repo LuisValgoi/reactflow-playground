@@ -1,5 +1,5 @@
 import { BaseSyntheticEvent, DragEvent, MutableRefObject } from 'react'
-import { Edge, Node, ReactFlowInstance } from 'reactflow'
+import { Node, ReactFlowInstance } from 'reactflow'
 
 import { IMessage } from '@/interfaces'
 

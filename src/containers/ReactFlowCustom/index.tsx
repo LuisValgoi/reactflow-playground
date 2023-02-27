@@ -2,7 +2,6 @@ import React, {
     DragEvent,
     memo,
     MutableRefObject,
-    RefObject,
     useCallback,
     useMemo,
 } from 'react'
@@ -24,13 +23,11 @@ import MessageNR from '@/components/Node/MessageNRNode'
 
 import { useApp } from '@/providers/AppProvider'
 
-import 'reactflow/dist/style.css'
-
 const HIDE_REACT_FLOW_WATERMARK = true
 
-type IReactFlowContainerProps = ReactFlowProps & {}
+type IReactFlowCustomProps = ReactFlowProps & {}
 
-const ReactFlowContainer: React.FC<IReactFlowContainerProps> = ({
+const ReactFlowCustom: React.FC<IReactFlowCustomProps> = ({
     children,
     ...rest
 }) => {
@@ -70,6 +67,7 @@ const ReactFlowContainer: React.FC<IReactFlowContainerProps> = ({
             proOptions={{ hideAttribution: HIDE_REACT_FLOW_WATERMARK }}
             nodes={nodes}
             edges={edges}
+            // defaultViewport={canvasData?.viewport}
             nodeTypes={nodeTypes}
             onNodesChange={onNodesChange}
             onEdgesChange={onEdgesChange}
@@ -85,4 +83,4 @@ const ReactFlowContainer: React.FC<IReactFlowContainerProps> = ({
     )
 }
 
-export default memo(ReactFlowContainer)
+export default memo(ReactFlowCustom)
