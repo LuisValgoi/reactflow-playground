@@ -15,7 +15,7 @@ import { ReactFlowInstance, useReactFlow } from 'reactflow'
 import { IMessage } from '@/interfaces'
 
 import { addNode as addNodeUtils, setMoveEffect } from '@/utils/ReactFlow'
-import { snakeCase } from 'lodash'
+import { snakeCase, uniqueId } from 'lodash'
 
 type IAppState = {
     skeletonRef: RefObject<HTMLElement>
@@ -38,14 +38,14 @@ export function AppProvider({ children }: { children: JSX.Element }) {
 
     const [rfInstance, setRfInstance] = useState<ReactFlowInstance>()
 
-    const [canvasName, setCanvasName] = useState('Gap in Care')
+    const [canvasName, setCanvasName] = useState(
+        `canvas-name-${new Date().getTime()}`
+    )
 
     const saveCanvas = useCallback(() => {
         const canvasNameKey = snakeCase(canvasName)
         const canvasObject = rfInstance?.toObject()
-        console.log(canvasNameKey, canvasObject)
-        // TODO: Complete
-        // localStorage.setItem(key, value)
+        localStorage.setItem(canvasNameKey, JSON.stringify(canvasObject))
     }, [rfInstance, canvasName])
 
     const addNode = useCallback(
