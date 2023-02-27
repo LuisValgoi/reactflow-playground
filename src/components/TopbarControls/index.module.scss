@@ -19,32 +19,3 @@
         margin: 0;
     }
 }
-
-.button {
-    display: flex;
-    gap: 0.5rem;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
-    border: unset;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    transition: all 0.5s ease;
-    padding: 0.5rem;
-
-    &:hover {
-        transform: scale(1.1);
-        background-color: #f4f4f4;
-    }
-
-    &:active {
-        transform: scale(0.95);
-    }
-
-    & svg {
-        & path {
-            fill: #5F6AC4;
-        }
-    }
-}

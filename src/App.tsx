@@ -7,25 +7,26 @@ import Skeleton from '@/components/Skeleton'
 import TopBarControls from '@/components/TopBarControls'
 
 import { AppProvider } from '@/providers/AppProvider'
+import ThemeProvider from '@/providers/ThemeProvider'
 
 import ReactFlowContainer from '@/containers/ReactFlowContainer'
 
-import './App.css';
-
 function App() {
     return (
-        <ReactFlowProvider>
-            <AppProvider>
-                <Skeleton>
-                    <ReactFlowContainer>
-                        <Background />
-                        <InteractiveControls />
-                        <TopBarControls />
-                        <SidebarControls />
-                    </ReactFlowContainer>
-                </Skeleton>
-            </AppProvider>
-        </ReactFlowProvider>
+        <ThemeProvider>
+            <ReactFlowProvider>
+                <AppProvider>
+                    <Skeleton>
+                        <ReactFlowContainer>
+                            <Background />
+                            <InteractiveControls />
+                            <TopBarControls />
+                            <SidebarControls />
+                        </ReactFlowContainer>
+                    </Skeleton>
+                </AppProvider>
+            </ReactFlowProvider>
+        </ThemeProvider>
     )
 }
 

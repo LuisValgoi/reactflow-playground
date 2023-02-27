@@ -2,11 +2,10 @@ import classNames from 'classnames'
 import React from 'react'
 
 import { ReactComponent as CareMessageIcon } from '@/assets/icons/caremessage.svg'
-import { ReactComponent as SaveIcon } from '@/assets/icons/save.svg'
 
 import EditableCanvasName from '@/components/EditableCanvasName'
 
-import { useApp } from '@/providers/AppProvider'
+import SaveCanvasButton from '@/components/SaveCanvasButton'
 
 import styles from './index.module.scss'
 
@@ -17,11 +16,7 @@ const TopBarControls: React.FC<ITopBarControls> = ({
     children,
     ...restProps
 }) => {
-    const { saveCanvas } = useApp()
-
     const wrapperClasses = classNames(styles.wrapper, className)
-
-    const buttonClasses = classNames(styles.button, className)
 
     return (
         <div className={wrapperClasses} {...restProps}>
@@ -29,10 +24,7 @@ const TopBarControls: React.FC<ITopBarControls> = ({
 
             <EditableCanvasName />
 
-            <button className={buttonClasses} tabIndex={0} onClick={saveCanvas}>
-                <SaveIcon />
-                <p>Save</p>
-            </button>
+            <SaveCanvasButton />
         </div>
     )
 }
