@@ -27,7 +27,12 @@ const MessageFooterResponseButton: React.FC<IMessageFooterResponseButton> = ({
             >
                 {children}
             </button>
-            <Handle className={styles.handle} id={handleId} type={handleType} position={handlePosition} />
+            <Handle
+                className={styles.handle}
+                id={handleId}
+                type={handleType}
+                position={handlePosition}
+            />
         </div>
     )
 }

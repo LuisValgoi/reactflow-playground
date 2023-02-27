@@ -49,6 +49,7 @@ const EditableCanvasName: React.FC = () => {
                 className={styles.paragraph}
                 onDoubleClick={handleTextDoubleClickName}
             >
+                <span>Canvas Name: </span>
                 {canvasName}
             </p>
         </div>

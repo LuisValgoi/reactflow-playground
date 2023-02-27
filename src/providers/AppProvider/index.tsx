@@ -37,7 +37,10 @@ export function AppProvider({ children }: { children: JSX.Element }) {
 
     const { canvasId } = useParams<{ canvasId: string }>()
 
-    const initialCanvasName = useMemo(() => canvasId || `canvas-name-${new Date().getTime()}`, [canvasId])
+    const initialCanvasName = useMemo(
+        () => canvasId || `${new Date().getTime()}`,
+        [canvasId]
+    )
 
     const navigate = useNavigate()
 
