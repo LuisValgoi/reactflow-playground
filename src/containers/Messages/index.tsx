@@ -2,7 +2,7 @@ import React, { DragEvent, useCallback } from 'react'
 
 import { IMessage } from '@/interfaces'
 
-import MessageBaseNode from '@/components/Node/MessageBaseNode'
+import MessageBaseNode from '@/components/MessageBaseNodeLayout'
 
 import { useApp } from '@/providers/AppProvider'
 

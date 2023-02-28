@@ -19,7 +19,9 @@ import { IMessage } from '@/interfaces'
 
 import { getNode, isNodeInPane, setMoveEffect } from '@/utils/ReactFlow'
 
-import MessageNR from '@/components/Node/MessageNRNode'
+import MessageABCNode from '@/components/CustomNodes/MessageABCNode'
+import MessageYesNoNode from '@/components/CustomNodes/MessageYesNoNode'
+import MessageDefaultNode from '@/components/CustomNodes/MessageDefaultNode'
 
 import { useApp } from '@/providers/AppProvider'
 
@@ -37,7 +39,7 @@ const ReactFlowCustom: React.FC<IReactFlowCustomProps> = ({
 
     const [edges, setEdges, onEdgesChange] = useEdgesState([])
 
-    const nodeTypes = useMemo(() => ({ messageNR: MessageNR as any }), [])
+    const nodeTypes = useMemo(() => ({ MessageABCNode, MessageYesNoNode, MessageDefaultNode }), [])
 
     const onConnect = useCallback((connection: Connection) => {
         setEdges((eds) => addEdge(connection, eds))
@@ -67,8 +69,7 @@ const ReactFlowCustom: React.FC<IReactFlowCustomProps> = ({
             proOptions={{ hideAttribution: HIDE_REACT_FLOW_WATERMARK }}
             nodes={nodes}
             edges={edges}
-            // defaultViewport={canvasData?.viewport}
-            nodeTypes={nodeTypes}
+            nodeTypes={nodeTypes as any}
             onNodesChange={onNodesChange}
             onEdgesChange={onEdgesChange}
             onConnect={onConnect}

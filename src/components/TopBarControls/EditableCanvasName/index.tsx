@@ -34,6 +34,7 @@ const EditableCanvasName: React.FC = () => {
         return (
             <input
                 autoFocus
+                tabIndex={0}
                 className={styles.input}
                 defaultValue={canvasName}
                 onBlur={handleInputBlur}
@@ -46,6 +47,7 @@ const EditableCanvasName: React.FC = () => {
     return (
         <div>
             <p
+                tabIndex={0}
                 className={styles.paragraph}
                 onDoubleClick={handleTextDoubleClickName}
             >

@@ -73,31 +73,31 @@ export function AppProvider({ children }: { children: JSX.Element }) {
         () => [
             {
                 heading: 'USER-08433-Q',
-                type: 'messageNR',
+                type: 'MessageABCNode',
                 content:
                     'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
             },
             {
                 heading: 'USER-08434-Q',
-                type: 'output',
+                type: 'MessageYesNoNode',
                 content:
                     'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
             },
             {
                 heading: 'USER-08435-Q',
-                type: 'default',
+                type: 'MessageDefaultNode',
                 content:
                     'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
             },
             {
                 heading: 'USER-08436-Q',
-                type: 'output',
+                type: 'MessageDefaultNode',
                 content:
                     'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
             },
             {
                 heading: 'USER-08437-Q',
-                type: 'default',
+                type: 'MessageDefaultNode',
                 content:
                     'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
             },

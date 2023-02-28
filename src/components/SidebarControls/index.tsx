@@ -13,7 +13,7 @@ import Messages from '@/containers/Messages'
 
 import { useApp } from '@/providers/AppProvider'
 
-import SearchMessage from '@/components/SearchMessage'
+import SearchMessage from '@/components/SidebarControls/SearchMessage'
 import ToggleButton from '@/components/SidebarControls/ToggleButton'
 import Overlay from '@/components/SidebarControls/Overlay'
 

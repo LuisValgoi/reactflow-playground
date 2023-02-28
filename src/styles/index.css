@@ -13,3 +13,11 @@ input {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
         sans-serif;
 }
+
+.react-flow__handle {
+    width: 8px !important;
+    height: 8px !important;
+    background: #ebecf8 !important;
+    border: 0.5px solid #5f6ac4 !important;
+    border-radius: 2px !important;
+}

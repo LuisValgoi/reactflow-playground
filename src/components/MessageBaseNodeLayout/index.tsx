@@ -1,33 +1,43 @@
 import { memo, useCallback } from 'react'
+import { Handle, Position } from 'reactflow'
 import classNames from 'classnames'
 
 import { ReactComponent as PencilIcon } from '@/assets/icons/pencil.svg'
 import { ReactComponent as DeleteIcon } from '@/assets/icons/trash.svg'
 
-import MessageHeadActionButton from '@/components/NodeControl/MessageHeadActionButton'
+import MessageHeadActionButton from '@/components/CustomNodeControls/MessageHeadActionButton'
+import MessageFooterResponseButton from '@/components/CustomNodeControls/MessageFooterResponseButton'
 
-import styles from './index.module.scss'
 import { useApp } from '@/providers/AppProvider'
 
-type IMessageBaseNode<T extends keyof JSX.IntrinsicElements> = {
+import styles from './index.module.scss'
+
+type IMessageBaseNodeLayout<T extends keyof JSX.IntrinsicElements> = {
     id: string
     heading: string
     content: string
+    footer?: JSX.Element
+    handle?: JSX.Element
     hideControls?: boolean
     selected?: boolean
+    isConnectable?: boolean
     as?: keyof JSX.IntrinsicElements
 } & JSX.IntrinsicElements[T]
 
-const MessageBaseNode = <T extends keyof JSX.IntrinsicElements>({
+const MessageBaseNodeLayout = <T extends keyof JSX.IntrinsicElements>({
+    id,
     heading,
     content,
-    selected,
-    as = 'div',
+    footer,
+    handle,
     hideControls = true,
+    selected,
+    isConnectable = true,
+    as = 'div',
     className,
     children,
     ...restProps
-}: IMessageBaseNode<T>) => {
+}: IMessageBaseNodeLayout<T>) => {
     const { removeNode } = useApp()
 
     const containerClasses = classNames(
@@ -40,19 +50,21 @@ const MessageBaseNode = <T extends keyof JSX.IntrinsicElements>({
 
     const validProps = restProps as Omit<
         typeof restProps,
-        keyof IMessageBaseNode<T>
+        keyof IMessageBaseNodeLayout<T>
     >
 
     const handleDelete = useCallback(() => {
         if (window.confirm('Are you sure you want to delete?') === true) {
-            removeNode(restProps.id)
+            removeNode(id)
         }
     }, [])
 
     return (
         <Component tabIndex={0} className={containerClasses} {...validProps}>
+            {isConnectable && handle}
+
             <div className={styles.head}>
-                {heading && <p>{heading}</p>}
+                <p>{heading}</p>
 
                 {!hideControls && (
                     <div className={styles.headActions}>
@@ -68,9 +80,20 @@ const MessageBaseNode = <T extends keyof JSX.IntrinsicElements>({
 
             <div className={styles.content}>{content}</div>
 
-            {children}
+            {!hideControls && (
+                <div className={styles.footer}>
+                    <MessageFooterResponseButton
+                        handleId="no-response"
+                        handlePosition={Position.Bottom}
+                        handleType="source"
+                    >
+                        No Response
+                    </MessageFooterResponseButton>
+                    {footer}
+                </div>
+            )}
         </Component>
     )
 }
 
-export default memo(MessageBaseNode)
+export default memo(MessageBaseNodeLayout)

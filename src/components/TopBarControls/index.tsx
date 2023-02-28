@@ -3,9 +3,9 @@ import React from 'react'
 
 import { ReactComponent as CareMessageIcon } from '@/assets/icons/caremessage.svg'
 
-import EditableCanvasName from '@/components/EditableCanvasName'
+import EditableCanvasName from '@/components/TopBarControls/EditableCanvasName'
 
-import SaveCanvasButton from '@/components/SaveCanvasButton'
+import SaveCanvasButton from '@/components/TopBarControls/SaveCanvasButton'
 
 import styles from './index.module.scss'
 
@@ -20,7 +20,7 @@ const TopBarControls: React.FC<ITopBarControls> = ({
 
     return (
         <div className={wrapperClasses} {...restProps}>
-            <CareMessageIcon />
+            <CareMessageIcon tabIndex={0} />
 
             <EditableCanvasName />
 
