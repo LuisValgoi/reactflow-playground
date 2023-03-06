@@ -33,7 +33,7 @@ type IAppState = {
     saveCanvas: () => void
     addNode: (event: DragEvent<HTMLElement>, message: IMessage) => void
     removeNode: (nodeId: string) => void
-    removeEdge: (edgeId: string) => viod
+    removeEdge: (edgeId: string) => void
     setCanvasName: Dispatch<SetStateAction<string>>
     setReactFlowInstance: Dispatch<ReactFlowInstance>
 }
