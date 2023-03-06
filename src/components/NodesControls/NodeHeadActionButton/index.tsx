@@ -3,12 +3,12 @@ import classNames from 'classnames'
 
 import styles from './index.module.scss'
 
-type IMessageHeadActionButton = {
+type INodeHeadActionButton = {
     Icon: React.FC<React.SVGProps<SVGSVGElement>>
     alt: string
 } & JSX.IntrinsicElements['button']
 
-const MessageHeadActionButton: React.FC<IMessageHeadActionButton> = ({
+const NodeHeadActionButton: React.FC<INodeHeadActionButton> = ({
     Icon,
     alt,
     ...restProps
@@ -25,4 +25,4 @@ const MessageHeadActionButton: React.FC<IMessageHeadActionButton> = ({
     )
 }
 
-export default memo(MessageHeadActionButton)
+export default memo(NodeHeadActionButton)

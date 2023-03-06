@@ -2,7 +2,7 @@ import React, { DragEvent, useCallback } from 'react'
 
 import { IMessage } from '@/interfaces'
 
-import MessageBaseNode from '@/components/MessageBaseNodeLayout'
+import NodesLayoutBase from '@/components/NodesLayout/Base'
 
 import { useApp } from '@/providers/AppProvider'
 
@@ -25,7 +25,7 @@ const Messages: React.FC<IMessages> = ({ data }) => {
     return (
         <ul className={styles.list}>
             {data.map((message) => (
-                <MessageBaseNode
+                <NodesLayoutBase
                     id={message.heading}
                     as="li"
                     draggable

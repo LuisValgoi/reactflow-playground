@@ -2,14 +2,14 @@ import { IMessage } from '@/interfaces'
 import React, { memo } from 'react'
 import { Handle, Node, Position } from 'reactflow'
 
-import MessageBaseNode from '@/components/MessageBaseNodeLayout'
-import MessageFooterResponseButton from '@/components/CustomNodeControls/MessageFooterResponseButton'
+import NodesLayoutBase from '@/components/NodesLayout/Base'
+import NodeFooterResponseButton from '@/components/NodesControls/NodeFooterResponseButton'
 
-type IMessageABCNode = Node<IMessage>
+type IABCNode = Node<IMessage>
 
-const MessageABCNode: React.FC<IMessageABCNode> = ({ ...restProps }) => {
+const ABCNode: React.FC<IABCNode> = ({ ...restProps }) => {
     return (
-        <MessageBaseNode
+        <NodesLayoutBase
             id={restProps.id}
             heading={restProps.data.heading}
             content={restProps.data.content}
@@ -26,31 +26,31 @@ const MessageABCNode: React.FC<IMessageABCNode> = ({ ...restProps }) => {
             }
             footer={
                 <>
-                    <MessageFooterResponseButton
+                    <NodeFooterResponseButton
                         handleId="a"
                         handlePosition={Position.Bottom}
                         handleType="source"
                     >
                         A
-                    </MessageFooterResponseButton>
-                    <MessageFooterResponseButton
+                    </NodeFooterResponseButton>
+                    <NodeFooterResponseButton
                         handleId="b"
                         handlePosition={Position.Bottom}
                         handleType="source"
                     >
                         B
-                    </MessageFooterResponseButton>
-                    <MessageFooterResponseButton
+                    </NodeFooterResponseButton>
+                    <NodeFooterResponseButton
                         handleId="c"
                         handlePosition={Position.Bottom}
                         handleType="source"
                     >
                         C
-                    </MessageFooterResponseButton>
+                    </NodeFooterResponseButton>
                 </>
             }
         />
     )
 }
 
-export default memo(MessageABCNode)
+export default memo(ABCNode)

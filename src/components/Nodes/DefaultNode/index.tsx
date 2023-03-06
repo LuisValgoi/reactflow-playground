@@ -2,13 +2,13 @@ import { IMessage } from '@/interfaces'
 import React, { memo } from 'react'
 import { Handle, Node, Position } from 'reactflow'
 
-import MessageBaseNode from '@/components/MessageBaseNodeLayout'
+import NodesLayoutBase from '@/components/NodesLayout/Base'
 
-type IMessageDefaultNode = Node<IMessage>
+type IDefaultNode = Node<IMessage>
 
-const MessageDefaultNode: React.FC<IMessageDefaultNode> = ({ ...restProps }) => {
+const DefaultNode: React.FC<IDefaultNode> = ({ ...restProps }) => {
     return (
-        <MessageBaseNode
+        <NodesLayoutBase
             id={restProps.id}
             heading={restProps.data.heading}
             content={restProps.data.content}
@@ -27,4 +27,4 @@ const MessageDefaultNode: React.FC<IMessageDefaultNode> = ({ ...restProps }) => 
     )
 }
 
-export default memo(MessageDefaultNode)
+export default memo(DefaultNode)

@@ -4,13 +4,13 @@ import { Position, HandleType, Handle } from 'reactflow'
 
 import styles from './index.module.scss'
 
-type IMessageFooterResponseButton = {
+type INodeFooterResponseButton = {
     handleType: HandleType
     handlePosition: Position
     handleId?: string
 } & JSX.IntrinsicElements['button']
 
-const MessageFooterResponseButton: React.FC<IMessageFooterResponseButton> = ({
+const NodeFooterResponseButton: React.FC<INodeFooterResponseButton> = ({
     handleType,
     handlePosition,
     handleId,
@@ -37,4 +37,4 @@ const MessageFooterResponseButton: React.FC<IMessageFooterResponseButton> = ({
     )
 }
 
-export default memo(MessageFooterResponseButton)
+export default memo(NodeFooterResponseButton)

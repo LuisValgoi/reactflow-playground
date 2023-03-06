@@ -1,18 +1,18 @@
 import { memo, useCallback } from 'react'
-import { Handle, Position } from 'reactflow'
+import { Position } from 'reactflow'
 import classNames from 'classnames'
 
 import { ReactComponent as PencilIcon } from '@/assets/icons/pencil.svg'
 import { ReactComponent as DeleteIcon } from '@/assets/icons/trash.svg'
 
-import MessageHeadActionButton from '@/components/CustomNodeControls/MessageHeadActionButton'
-import MessageFooterResponseButton from '@/components/CustomNodeControls/MessageFooterResponseButton'
+import NodeHeadActionButton from '@/components/NodesControls/NodeHeadActionButton'
+import NodeFooterResponseButton from '@/components/NodesControls/NodeFooterResponseButton'
 
 import { useApp } from '@/providers/AppProvider'
 
 import styles from './index.module.scss'
 
-type IMessageBaseNodeLayout<T extends keyof JSX.IntrinsicElements> = {
+type INodesLayoutBase<T extends keyof JSX.IntrinsicElements> = {
     id: string
     heading: string
     content: string
@@ -24,7 +24,7 @@ type IMessageBaseNodeLayout<T extends keyof JSX.IntrinsicElements> = {
     as?: keyof JSX.IntrinsicElements
 } & JSX.IntrinsicElements[T]
 
-const MessageBaseNodeLayout = <T extends keyof JSX.IntrinsicElements>({
+const NodesLayoutBase = <T extends keyof JSX.IntrinsicElements>({
     id,
     heading,
     content,
@@ -37,7 +37,7 @@ const MessageBaseNodeLayout = <T extends keyof JSX.IntrinsicElements>({
     className,
     children,
     ...restProps
-}: IMessageBaseNodeLayout<T>) => {
+}: INodesLayoutBase<T>) => {
     const { removeNode } = useApp()
 
     const containerClasses = classNames(
@@ -50,7 +50,7 @@ const MessageBaseNodeLayout = <T extends keyof JSX.IntrinsicElements>({
 
     const validProps = restProps as Omit<
         typeof restProps,
-        keyof IMessageBaseNodeLayout<T>
+        keyof INodesLayoutBase<T>
     >
 
     const handleDelete = useCallback(() => {
@@ -68,8 +68,8 @@ const MessageBaseNodeLayout = <T extends keyof JSX.IntrinsicElements>({
 
                 {!hideControls && (
                     <div className={styles.headActions}>
-                        <MessageHeadActionButton alt="edit" Icon={PencilIcon} />
-                        <MessageHeadActionButton
+                        <NodeHeadActionButton alt="edit" Icon={PencilIcon} />
+                        <NodeHeadActionButton
                             alt="delete"
                             onClick={handleDelete}
                             Icon={DeleteIcon}
@@ -82,13 +82,13 @@ const MessageBaseNodeLayout = <T extends keyof JSX.IntrinsicElements>({
 
             {!hideControls && (
                 <div className={styles.footer}>
-                    <MessageFooterResponseButton
+                    <NodeFooterResponseButton
                         handleId="no-response"
                         handlePosition={Position.Bottom}
                         handleType="source"
                     >
-                        No Response
-                    </MessageFooterResponseButton>
+                        NR
+                    </NodeFooterResponseButton>
                     {footer}
                 </div>
             )}
@@ -96,4 +96,4 @@ const MessageBaseNodeLayout = <T extends keyof JSX.IntrinsicElements>({
     )
 }
 
-export default memo(MessageBaseNodeLayout)
+export default memo(NodesLayoutBase)

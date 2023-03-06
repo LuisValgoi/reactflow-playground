@@ -19,9 +19,9 @@ import { IMessage } from '@/interfaces'
 
 import { getNode, isNodeInPane, setMoveEffect } from '@/utils/ReactFlow'
 
-import MessageABCNode from '@/components/CustomNodes/MessageABCNode'
-import MessageYesNoNode from '@/components/CustomNodes/MessageYesNoNode'
-import MessageDefaultNode from '@/components/CustomNodes/MessageDefaultNode'
+import ABCNode from '@/components/Nodes/ABCNode'
+import YesNoNode from '@/components/Nodes/YesNoNode'
+import DefaultNode from '@/components/Nodes/DefaultNode'
 
 import { useApp } from '@/providers/AppProvider'
 
@@ -39,7 +39,7 @@ const ReactFlowCustom: React.FC<IReactFlowCustomProps> = ({
 
     const [edges, setEdges, onEdgesChange] = useEdgesState([])
 
-    const nodeTypes = useMemo(() => ({ MessageABCNode, MessageYesNoNode, MessageDefaultNode }), [])
+    const nodeTypes = useMemo(() => ({ ABCNode, YesNoNode, DefaultNode }), [])
 
     const onConnect = useCallback((connection: Connection) => {
         setEdges((eds) => addEdge(connection, eds))

@@ -1,4 +1,4 @@
-export type IMessageType = 'input' | 'output' | 'default' | 'MessageABCNode' | 'MessageYesNoNode' | 'MessageDefaultNode'
+export type IMessageType = 'input' | 'output' | 'default' | 'ABCNode' | 'YesNoNode' | 'DefaultNode'
 
 export type IMessage = {
     heading: string

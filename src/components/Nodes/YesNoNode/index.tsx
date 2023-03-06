@@ -2,14 +2,14 @@ import { IMessage } from '@/interfaces'
 import React, { memo } from 'react'
 import { Handle, Node, Position } from 'reactflow'
 
-import MessageBaseNode from '@/components/MessageBaseNodeLayout'
-import MessageFooterResponseButton from '@/components/CustomNodeControls/MessageFooterResponseButton'
+import NodesLayoutBase from '@/components/NodesLayout/Base'
+import NodeFooterResponseButton from '@/components/NodesControls/NodeFooterResponseButton'
 
 type IMessageNRNode = Node<IMessage>
 
 const MessageNRNode: React.FC<IMessageNRNode> = ({ ...restProps }) => {
     return (
-        <MessageBaseNode
+        <NodesLayoutBase
             id={restProps.id}
             heading={restProps.data.heading}
             content={restProps.data.content}
@@ -26,20 +26,20 @@ const MessageNRNode: React.FC<IMessageNRNode> = ({ ...restProps }) => {
             }
             footer={
                 <>
-                    <MessageFooterResponseButton
+                    <NodeFooterResponseButton
                         handleId="yes"
                         handlePosition={Position.Bottom}
                         handleType="source"
                     >
                         Yes
-                    </MessageFooterResponseButton>
-                    <MessageFooterResponseButton
+                    </NodeFooterResponseButton>
+                    <NodeFooterResponseButton
                         handleId="no"
                         handlePosition={Position.Bottom}
                         handleType="source"
                     >
                         No
-                    </MessageFooterResponseButton>
+                    </NodeFooterResponseButton>
                 </>
             }
         />
