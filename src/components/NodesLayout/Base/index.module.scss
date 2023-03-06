@@ -10,7 +10,7 @@
     position: relative;
     cursor: pointer;
     width: 400px;
-    transition: background-color 0.5s ease;
+    transition: background-color 0.2s ease;
 
     &:hover {
         background-color: #dddfee;
@@ -19,6 +19,19 @@
     &.selected {
         outline: #969cc7 solid 2px;
     }
+}
+
+.handleWrapper {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    display: block;
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
+.container:hover .handleWrapper {
+    opacity: 1;
 }
 
 .head {

@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react'
+import { Children, cloneElement, memo, useCallback } from 'react'
 import { Position } from 'reactflow'
 import classNames from 'classnames'
 
@@ -61,7 +61,7 @@ const NodesLayoutBase = <T extends keyof JSX.IntrinsicElements>({
 
     return (
         <Component tabIndex={0} className={containerClasses} {...validProps}>
-            {isConnectable && handle}
+            {isConnectable && <div className={styles.handleWrapper}>{handle}</div>}
 
             <div className={styles.head}>
                 <p>{heading}</p>
