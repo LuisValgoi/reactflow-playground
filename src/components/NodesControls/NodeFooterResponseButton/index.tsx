@@ -32,7 +32,6 @@ const NodeFooterResponseButton: React.FC<INodeFooterResponseButton> = ({
                 type={handleType}
                 position={handlePosition}
                 isConnectable
-                className={styles.handle}
             />
         </div>
     )

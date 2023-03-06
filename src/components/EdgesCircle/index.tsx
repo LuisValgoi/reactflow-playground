@@ -1,8 +1,8 @@
 import React, { memo } from 'react'
 
-type ICircle = { x: number; y: number }
+type IEdgesCircle = { x: number; y: number }
 
-const Circle: React.FC<ICircle> = (props) => {
+const EdgesCircle: React.FC<IEdgesCircle> = (props) => {
     return (
         <svg
             x={props.x - 8}
@@ -23,4 +23,4 @@ const Circle: React.FC<ICircle> = (props) => {
     )
 }
 
-export default memo(Circle)
+export default memo(EdgesCircle)

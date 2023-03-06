@@ -18,9 +18,9 @@ import { getNode, isNodeInPane, setMoveEffect } from '@/utils/ReactFlow'
 
 import { useApp } from '@/providers/AppProvider'
 
-import edgeTypes from '@/components/_edges_/types'
-import nodeTypes from '@/components/_nodes_/types'
-import DefaultLine from '@/components/_lines_/DefaultLine'
+import edgeLines from '@/components/_edges_/edgeLines'
+import edgeTypes from '@/components/_edges_/edgeTypes'
+import nodeTypes from '@/components/_nodes_/nodeTypes'
 
 const Flow: React.FC<ReactFlowProps> = ({ children, ...rest }) => {
     const {
@@ -62,7 +62,7 @@ const Flow: React.FC<ReactFlowProps> = ({ children, ...rest }) => {
 
     return (
         <ReactFlowOriginal
-            // deleteKeyCode={[]}
+            deleteKeyCode={[]}
             proOptions={{ hideAttribution: true }}
             nodes={nodes}
             edges={edges}
@@ -72,7 +72,7 @@ const Flow: React.FC<ReactFlowProps> = ({ children, ...rest }) => {
             minZoom={MIN_ZOOM}
             nodeTypes={nodeTypes}
             edgeTypes={edgeTypes}
-            connectionLineComponent={DefaultLine}
+            connectionLineComponent={edgeLines}
             panOnScroll={true}
             zoomOnScroll={false}
             onNodesChange={onNodesChange}
