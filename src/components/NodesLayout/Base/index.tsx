@@ -61,7 +61,9 @@ const NodesLayoutBase = <T extends keyof JSX.IntrinsicElements>({
 
     return (
         <Component tabIndex={0} className={containerClasses} {...validProps}>
-            {isConnectable && <div className={styles.handleWrapper}>{handle}</div>}
+            {isConnectable && (
+                <div className={styles.handleWrapper}>{handle}</div>
+            )}
 
             <div className={styles.head}>
                 <p>{heading}</p>

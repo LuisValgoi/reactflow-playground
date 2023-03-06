@@ -19,7 +19,7 @@
         "baseUrl": ".",
         "paths": {
             "@/*": ["./src/*"]
-        },
+        }
     },
     "files": ["custom.d.ts"],
     "include": ["src"],

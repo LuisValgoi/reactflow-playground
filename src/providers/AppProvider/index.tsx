@@ -33,6 +33,7 @@ type IAppState = {
     saveCanvas: () => void
     addNode: (event: DragEvent<HTMLElement>, message: IMessage) => void
     removeNode: (nodeId: string) => void
+    removeEdge: (edgeId: string) => viod
     setCanvasName: Dispatch<SetStateAction<string>>
     setReactFlowInstance: Dispatch<ReactFlowInstance>
 }
@@ -91,6 +92,10 @@ export function AppProvider({ children }: { children: JSX.Element }) {
         deleteElements({ nodes: [{ id: nodeId }] })
     }, [])
 
+    const removeEdge = useCallback((edgeId: string) => {
+        deleteElements({ edges: [{ id: edgeId }] })
+    }, [])
+
     const messages: IMessage[] = useMemo(
         () => [
             {
@@ -138,6 +143,7 @@ export function AppProvider({ children }: { children: JSX.Element }) {
                 setCanvasName,
                 addNode,
                 removeNode,
+                removeEdge,
                 saveCanvas,
                 setReactFlowInstance: setRfInstance,
             }}

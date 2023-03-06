@@ -14,7 +14,10 @@ const SaveCanvasButton: React.FC = () => {
         <>
             <Tooltip closeOnEsc id="save-canvas-button" place="left">
                 <div>
-                    <p>When you click save, it will change the URL address and save in LocalStorage</p>
+                    <p>
+                        When you click save, it will change the URL address and
+                        save in LocalStorage
+                    </p>
                 </div>
             </Tooltip>
             <button

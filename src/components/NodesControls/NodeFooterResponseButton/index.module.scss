@@ -1,5 +1,6 @@
 .wrapper {
     position: relative;
+    cursor: pointer;
 }
 
 .button {
@@ -7,4 +8,14 @@
     border: 0;
     padding: 1rem;
     border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.handle {
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
+.wrapper:hover .handle {
+    opacity: 1;
 }

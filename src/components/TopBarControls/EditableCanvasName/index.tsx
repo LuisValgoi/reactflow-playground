@@ -8,7 +8,7 @@ const EditableCanvasName: React.FC = () => {
 
     const [shownInput, setShowInput] = useState(false)
 
-    const handleTextDoubleClickName = useCallback(() => {
+    const handleTextClickName = useCallback(() => {
         setShowInput(true)
     }, [])
 
@@ -49,7 +49,7 @@ const EditableCanvasName: React.FC = () => {
             <p
                 tabIndex={0}
                 className={styles.paragraph}
-                onDoubleClick={handleTextDoubleClickName}
+                onClick={handleTextClickName}
             >
                 <span>Canvas Name: </span>
                 {canvasName}

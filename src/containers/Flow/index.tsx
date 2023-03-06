@@ -2,6 +2,7 @@ import React, { DragEvent, memo, MutableRefObject, useCallback } from 'react'
 import {
     addEdge,
     Connection,
+    Edge,
     Node,
     ReactFlow as ReactFlowOriginal,
     ReactFlowProps,
@@ -9,34 +10,35 @@ import {
     useNodesState,
 } from 'reactflow'
 
-import { IMessage } from '@/interfaces'
+import { IEdgeType, IMessage } from '@/interfaces'
+
+import { DEFAULT_ZOOM, MAX_ZOOM, MIN_ZOOM } from '@/constants'
 
 import { getNode, isNodeInPane, setMoveEffect } from '@/utils/ReactFlow'
 
+import { useApp } from '@/providers/AppProvider'
+
 import edgeTypes from '@/components/_edges_/types'
 import nodeTypes from '@/components/_nodes_/types'
-import DefaultLine from '@/components/_edges_/DefaultLine'
-
-import { useApp } from '@/providers/AppProvider'
-import { DEFAULT_ZOOM, MAX_ZOOM, MIN_ZOOM } from '@/constants'
+import DefaultLine from '@/components/_lines_/DefaultLine'
 
 const Flow: React.FC<ReactFlowProps> = ({ children, ...rest }) => {
-    const { skeletonRef, reactFlowInstance, defaultViewPort, setReactFlowInstance } = useApp()
+    const {
+        skeletonRef,
+        reactFlowInstance,
+        defaultViewPort,
+        setReactFlowInstance,
+    } = useApp()
 
     const [nodes, setNodes, onNodesChange] = useNodesState<IMessage>([])
 
     const [edges, setEdges, onEdgesChange] = useEdgesState([])
 
     const onConnect = useCallback((connection: Connection) => {
-        setEdges((eds) =>
-            addEdge(
-                {
-                    ...connection,
-                    type: 'DefaultEdge',
-                },
-                eds
-            )
-        )
+        setEdges((existingEdges) => {
+            const newEdge = { ...connection, type: IEdgeType.DEFAULT } as Edge
+            return addEdge(newEdge, existingEdges)
+        })
     }, [])
 
     const onDragOver = useCallback((event: DragEvent<HTMLElement>) => {
@@ -60,6 +62,7 @@ const Flow: React.FC<ReactFlowProps> = ({ children, ...rest }) => {
 
     return (
         <ReactFlowOriginal
+            // deleteKeyCode={[]}
             proOptions={{ hideAttribution: true }}
             nodes={nodes}
             edges={edges}
@@ -69,16 +72,15 @@ const Flow: React.FC<ReactFlowProps> = ({ children, ...rest }) => {
             minZoom={MIN_ZOOM}
             nodeTypes={nodeTypes}
             edgeTypes={edgeTypes}
+            connectionLineComponent={DefaultLine}
             panOnScroll={true}
             zoomOnScroll={false}
-            connectionLineComponent={DefaultLine}
             onNodesChange={onNodesChange}
             onEdgesChange={onEdgesChange}
             onConnect={onConnect}
             onInit={setReactFlowInstance}
             onDrop={onDrop}
             onDragOver={onDragOver}
-            deleteKeyCode={[]}
             {...rest}
         >
             {children}
