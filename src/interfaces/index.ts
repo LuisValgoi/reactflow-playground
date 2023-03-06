@@ -1,7 +1,15 @@
-export type IMessageType = 'input' | 'output' | 'default' | 'ABCNode' | 'YesNoNode' | 'DefaultNode'
+export const enum INodeType {
+    ABC = 'ABCNode',
+    YN = 'YesNoNode',
+    DEFAULT = 'DefaultNode',
+}
+
+export const enum IEdgeType {
+    DEFAULT = 'DefaultEdge',
+}
 
 export type IMessage = {
     heading: string
     content: string
-    type: IMessageType
+    type: INodeType
 }

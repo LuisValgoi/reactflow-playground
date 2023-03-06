@@ -1,18 +1,19 @@
 import { IMessage } from '@/interfaces'
-import React, { memo } from 'react'
-import { Handle, Node, Position } from 'reactflow'
+import { memo } from 'react'
+import { Handle, NodeProps, Position } from 'reactflow'
 
 import NodesLayoutBase from '@/components/NodesLayout/Base'
 
-type IDefaultNode = Node<IMessage>
+type IDefaultNode = NodeProps<IMessage>
 
-const DefaultNode: React.FC<IDefaultNode> = ({ ...restProps }) => {
+const DefaultNode = ({ ...restProps }: IDefaultNode) => {
     return (
         <NodesLayoutBase
+            // {...restProps}
             id={restProps.id}
+            selected={restProps.selected}
             heading={restProps.data.heading}
             content={restProps.data.content}
-            selected={restProps.selected}
             hideControls={false}
             handle={
                 <>

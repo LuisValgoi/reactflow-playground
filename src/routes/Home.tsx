@@ -6,7 +6,7 @@ import SidebarControls from '@/components/SidebarControls'
 import Skeleton from '@/components/Skeleton'
 import TopBarControls from '@/components/TopBarControls'
 
-import ReactFlowCustom from '@/containers/ReactFlowCustom'
+import Flow from '@/containers/Flow'
 
 import { AppProvider } from '@/providers/AppProvider'
 
@@ -14,12 +14,12 @@ const Home: React.FC = () => {
     return (
         <AppProvider>
             <Skeleton>
-                <ReactFlowCustom>
+                <Flow>
                     <Background />
                     <InteractiveControls />
                     <TopBarControls />
                     <SidebarControls />
-                </ReactFlowCustom>
+                </Flow>
             </Skeleton>
         </AppProvider>
     )

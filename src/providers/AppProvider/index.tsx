@@ -10,19 +10,26 @@ import {
     useRef,
     useState,
 } from 'react'
-import { ReactFlowInstance, useReactFlow } from 'reactflow'
+import {
+    ReactFlowInstance,
+    ReactFlowJsonObject,
+    useReactFlow,
+    Viewport,
+} from 'reactflow'
 import { snakeCase } from 'lodash'
 import { useNavigate, useParams } from 'react-router-dom'
 
-import { IMessage } from '@/interfaces'
+import { IMessage, INodeType } from '@/interfaces'
 
 import { addNode as addNodeUtils, setMoveEffect } from '@/utils/ReactFlow'
+import { DEFAULT_ZOOM } from '@/constants'
 
 type IAppState = {
     skeletonRef: RefObject<HTMLElement>
     messages: IMessage[]
     canvasName: string
     reactFlowInstance: ReactFlowInstance | undefined
+    defaultViewPort: Viewport
     saveCanvas: () => void
     addNode: (event: DragEvent<HTMLElement>, message: IMessage) => void
     removeNode: (nodeId: string) => void
@@ -50,6 +57,21 @@ export function AppProvider({ children }: { children: JSX.Element }) {
 
     const [canvasName, setCanvasName] = useState(initialCanvasName)
 
+    const defaultViewPort = useMemo(() => {
+        const canvasNameKey = snakeCase(canvasName)
+        const canvasObjectRaw = localStorage.getItem(canvasNameKey)
+        if (!canvasObjectRaw) {
+            return {
+                x: DEFAULT_ZOOM,
+                y: DEFAULT_ZOOM,
+                zoom: DEFAULT_ZOOM,
+            } as Viewport
+        }
+
+        const canvasObject = JSON.parse(canvasObjectRaw) as ReactFlowJsonObject
+        return canvasObject.viewport
+    }, [canvasName])
+
     const saveCanvas = useCallback(() => {
         const canvasNameKey = snakeCase(canvasName)
         const canvasObject = rfInstance?.toObject()
@@ -73,31 +95,31 @@ export function AppProvider({ children }: { children: JSX.Element }) {
         () => [
             {
                 heading: 'USER-08433-Q',
-                type: 'ABCNode',
+                type: INodeType.ABC,
                 content:
                     'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
             },
             {
                 heading: 'USER-08434-Q',
-                type: 'YesNoNode',
+                type: INodeType.YN,
                 content:
                     'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
             },
             {
                 heading: 'USER-08435-Q',
-                type: 'DefaultNode',
+                type: INodeType.DEFAULT,
                 content:
                     'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
             },
             {
                 heading: 'USER-08436-Q',
-                type: 'DefaultNode',
+                type: INodeType.DEFAULT,
                 content:
                     'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
             },
             {
                 heading: 'USER-08437-Q',
-                type: 'DefaultNode',
+                type: INodeType.DEFAULT,
                 content:
                     'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
             },
@@ -112,6 +134,7 @@ export function AppProvider({ children }: { children: JSX.Element }) {
                 messages,
                 canvasName,
                 reactFlowInstance: rfInstance,
+                defaultViewPort,
                 setCanvasName,
                 addNode,
                 removeNode,

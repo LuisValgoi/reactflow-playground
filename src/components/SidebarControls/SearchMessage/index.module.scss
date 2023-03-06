@@ -1,6 +1,6 @@
 .wrapper {
     position: relative;
-    width: -webkit-fill-available;
+    width: 100%;
 }
 
 .span {
@@ -41,7 +41,7 @@
     background-color: white;
     border-radius: 0.5rem;
     outline: lightgrey solid 1px;
-    width: -webkit-fill-available;
+    width: calc(100% - 34px);
 
     &::placeholder {
         color: lightgrey;

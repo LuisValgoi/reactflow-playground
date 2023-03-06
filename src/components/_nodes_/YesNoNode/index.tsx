@@ -1,19 +1,20 @@
 import { IMessage } from '@/interfaces'
-import React, { memo } from 'react'
-import { Handle, Node, Position } from 'reactflow'
+import { memo } from 'react'
+import { Handle, NodeProps, Position } from 'reactflow'
 
 import NodesLayoutBase from '@/components/NodesLayout/Base'
 import NodeFooterResponseButton from '@/components/NodesControls/NodeFooterResponseButton'
 
-type IMessageNRNode = Node<IMessage>
+type IYNNode = NodeProps<IMessage>
 
-const MessageNRNode: React.FC<IMessageNRNode> = ({ ...restProps }) => {
+const YNNode = ({ ...restProps }: IYNNode) => {
     return (
         <NodesLayoutBase
+            // {...restProps}
             id={restProps.id}
+            selected={restProps.selected}
             heading={restProps.data.heading}
             content={restProps.data.content}
-            selected={restProps.selected}
             hideControls={false}
             handle={
                 <>
@@ -46,4 +47,4 @@ const MessageNRNode: React.FC<IMessageNRNode> = ({ ...restProps }) => {
     )
 }
 
-export default memo(MessageNRNode)
+export default memo(YNNode)

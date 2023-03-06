@@ -1,10 +1,4 @@
-import React, {
-    DragEvent,
-    memo,
-    MutableRefObject,
-    useCallback,
-    useMemo,
-} from 'react'
+import React, { DragEvent, memo, MutableRefObject, useCallback } from 'react'
 import {
     addEdge,
     Connection,
@@ -19,30 +13,30 @@ import { IMessage } from '@/interfaces'
 
 import { getNode, isNodeInPane, setMoveEffect } from '@/utils/ReactFlow'
 
-import ABCNode from '@/components/Nodes/ABCNode'
-import YesNoNode from '@/components/Nodes/YesNoNode'
-import DefaultNode from '@/components/Nodes/DefaultNode'
+import edgeTypes from '@/components/_edges_/types'
+import nodeTypes from '@/components/_nodes_/types'
+import DefaultLine from '@/components/_edges_/DefaultLine'
 
 import { useApp } from '@/providers/AppProvider'
+import { DEFAULT_ZOOM, MAX_ZOOM, MIN_ZOOM } from '@/constants'
 
-const HIDE_REACT_FLOW_WATERMARK = true
-
-type IReactFlowCustomProps = ReactFlowProps & {}
-
-const ReactFlowCustom: React.FC<IReactFlowCustomProps> = ({
-    children,
-    ...rest
-}) => {
-    const { skeletonRef, reactFlowInstance, setReactFlowInstance } = useApp()
+const Flow: React.FC<ReactFlowProps> = ({ children, ...rest }) => {
+    const { skeletonRef, reactFlowInstance, defaultViewPort, setReactFlowInstance } = useApp()
 
     const [nodes, setNodes, onNodesChange] = useNodesState<IMessage>([])
 
     const [edges, setEdges, onEdgesChange] = useEdgesState([])
 
-    const nodeTypes = useMemo(() => ({ ABCNode, YesNoNode, DefaultNode }), [])
-
     const onConnect = useCallback((connection: Connection) => {
-        setEdges((eds) => addEdge(connection, eds))
+        setEdges((eds) =>
+            addEdge(
+                {
+                    ...connection,
+                    type: 'DefaultEdge',
+                },
+                eds
+            )
+        )
     }, [])
 
     const onDragOver = useCallback((event: DragEvent<HTMLElement>) => {
@@ -66,10 +60,18 @@ const ReactFlowCustom: React.FC<IReactFlowCustomProps> = ({
 
     return (
         <ReactFlowOriginal
-            proOptions={{ hideAttribution: HIDE_REACT_FLOW_WATERMARK }}
+            proOptions={{ hideAttribution: true }}
             nodes={nodes}
             edges={edges}
-            nodeTypes={nodeTypes as any}
+            defaultViewport={defaultViewPort}
+            fitViewOptions={{ maxZoom: DEFAULT_ZOOM }}
+            maxZoom={MAX_ZOOM}
+            minZoom={MIN_ZOOM}
+            nodeTypes={nodeTypes}
+            edgeTypes={edgeTypes}
+            panOnScroll={true}
+            zoomOnScroll={false}
+            connectionLineComponent={DefaultLine}
             onNodesChange={onNodesChange}
             onEdgesChange={onEdgesChange}
             onConnect={onConnect}
@@ -84,4 +86,4 @@ const ReactFlowCustom: React.FC<IReactFlowCustomProps> = ({
     )
 }
 
-export default memo(ReactFlowCustom)
+export default memo(Flow)

@@ -1,19 +1,20 @@
 import { IMessage } from '@/interfaces'
-import React, { memo } from 'react'
-import { Handle, Node, Position } from 'reactflow'
+import { memo } from 'react'
+import { Handle, NodeProps, Position } from 'reactflow'
 
 import NodesLayoutBase from '@/components/NodesLayout/Base'
 import NodeFooterResponseButton from '@/components/NodesControls/NodeFooterResponseButton'
 
-type IABCNode = Node<IMessage>
+type IABCNode = NodeProps<IMessage>
 
-const ABCNode: React.FC<IABCNode> = ({ ...restProps }) => {
+const ABCNode = ({ ...restProps }: IABCNode) => {
     return (
         <NodesLayoutBase
+            // {...restProps}
             id={restProps.id}
+            selected={restProps.selected}
             heading={restProps.data.heading}
             content={restProps.data.content}
-            selected={restProps.selected}
             hideControls={false}
             handle={
                 <>
