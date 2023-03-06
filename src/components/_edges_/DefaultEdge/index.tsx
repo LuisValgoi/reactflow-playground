@@ -2,8 +2,8 @@ import React, { MouseEvent, useCallback } from 'react'
 import { EdgeProps, getBezierPath } from 'reactflow'
 import { useApp } from '@/providers/AppProvider'
 
-import EdgesArrow from '@/components/EdgesArrow'
-import EdgesCircle from '@/components/EdgesCircle'
+import EdgeArrow from '@/components/_edges_/_shared_/EdgeArrow'
+import EdgeCircle from '@/components/_edges_/_shared_/EdgeCircle'
 
 import styles from './index.module.scss'
 
@@ -37,7 +37,7 @@ const DefaultEdge: React.FC<EdgeProps> = ({
 
     return (
         <g>
-            <EdgesCircle x={sourceX} y={sourceY} />
+            <EdgeCircle x={sourceX} y={sourceY} />
 
             <path
                 d={edgePath}
@@ -58,7 +58,7 @@ const DefaultEdge: React.FC<EdgeProps> = ({
                 className={styles.path}
             />
 
-            <EdgesArrow x={targetX} y={targetY} />
+            <EdgeArrow x={targetX} y={targetY} />
         </g>
     )
 }

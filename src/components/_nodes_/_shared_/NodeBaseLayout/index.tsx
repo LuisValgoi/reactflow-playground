@@ -1,18 +1,18 @@
-import { Children, cloneElement, memo, useCallback } from 'react'
+import { memo, useCallback } from 'react'
 import { Position } from 'reactflow'
 import classNames from 'classnames'
 
 import { ReactComponent as PencilIcon } from '@/assets/icons/pencil.svg'
 import { ReactComponent as DeleteIcon } from '@/assets/icons/trash.svg'
 
-import NodeHeadActionButton from '@/components/NodesControls/NodeHeadActionButton'
-import NodeFooterResponseButton from '@/components/NodesControls/NodeFooterResponseButton'
+import NodeHeadActionButton from '@/components/_nodes_/_shared_/NodeHeadActionButton'
+import NodeFooterResponseButton from '@/components/_nodes_/_shared_/NodeFooterResponseButton'
 
 import { useApp } from '@/providers/AppProvider'
 
 import styles from './index.module.scss'
 
-type INodesLayoutBase<T extends keyof JSX.IntrinsicElements> = {
+type INodesBaseLayout<T extends keyof JSX.IntrinsicElements> = {
     id: string
     heading: string
     content: string
@@ -24,7 +24,7 @@ type INodesLayoutBase<T extends keyof JSX.IntrinsicElements> = {
     as?: keyof JSX.IntrinsicElements
 } & JSX.IntrinsicElements[T]
 
-const NodesLayoutBase = <T extends keyof JSX.IntrinsicElements>({
+const NodesBaseLayout = <T extends keyof JSX.IntrinsicElements>({
     id,
     heading,
     content,
@@ -37,7 +37,7 @@ const NodesLayoutBase = <T extends keyof JSX.IntrinsicElements>({
     className,
     children,
     ...restProps
-}: INodesLayoutBase<T>) => {
+}: INodesBaseLayout<T>) => {
     const { removeNode } = useApp()
 
     const containerClasses = classNames(
@@ -50,7 +50,7 @@ const NodesLayoutBase = <T extends keyof JSX.IntrinsicElements>({
 
     const validProps = restProps as Omit<
         typeof restProps,
-        keyof INodesLayoutBase<T>
+        keyof INodesBaseLayout<T>
     >
 
     const handleDelete = useCallback(() => {
@@ -98,4 +98,4 @@ const NodesLayoutBase = <T extends keyof JSX.IntrinsicElements>({
     )
 }
 
-export default memo(NodesLayoutBase)
+export default memo(NodesBaseLayout)

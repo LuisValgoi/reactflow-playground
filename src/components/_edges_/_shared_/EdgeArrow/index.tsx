@@ -1,8 +1,8 @@
 import React, { memo } from 'react'
 
-type IEdgesArrow = { x: number; y: number }
+type IEdgeArrow = { x: number; y: number }
 
-const EdgesArrow: React.FC<IEdgesArrow> = (props) => {
+const EdgeArrow: React.FC<IEdgeArrow> = (props) => {
     return (
         <svg
             viewBox="0 0 8 8"
@@ -21,4 +21,4 @@ const EdgesArrow: React.FC<IEdgesArrow> = (props) => {
     )
 }
 
-export default memo(EdgesArrow)
+export default memo(EdgeArrow)

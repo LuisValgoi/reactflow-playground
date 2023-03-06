@@ -2,14 +2,14 @@ import { IMessage } from '@/interfaces'
 import { memo } from 'react'
 import { Handle, NodeProps, Position } from 'reactflow'
 
-import NodesLayoutBase from '@/components/NodesLayout/Base'
-import NodeFooterResponseButton from '@/components/NodesControls/NodeFooterResponseButton'
+import NodesBaseLayout from '@/components/_nodes_/_shared_/NodeBaseLayout'
+import NodeFooterResponseButton from '@/components/_nodes_/_shared_/NodeFooterResponseButton'
 
 type IYNNode = NodeProps<IMessage>
 
 const YNNode = ({ ...restProps }: IYNNode) => {
     return (
-        <NodesLayoutBase
+        <NodesBaseLayout
             // {...restProps}
             id={restProps.id}
             selected={restProps.selected}
