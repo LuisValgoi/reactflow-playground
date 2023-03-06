@@ -1,6 +1,9 @@
 import React from 'react'
 import { ConnectionLineComponentProps, getBezierPath } from 'reactflow'
 
+import Arrow from '@/components/Arrow'
+import Circle from '@/components/Circle'
+
 const DefaultLine: React.FC<ConnectionLineComponentProps> = ({
     fromX,
     fromY,
@@ -8,8 +11,6 @@ const DefaultLine: React.FC<ConnectionLineComponentProps> = ({
     toX,
     toY,
     toPosition,
-    connectionLineType,
-    connectionLineStyle,
 }) => {
     const [edgePath] = getBezierPath({
         sourceX: fromX,
@@ -22,15 +23,11 @@ const DefaultLine: React.FC<ConnectionLineComponentProps> = ({
 
     return (
         <g>
-            <path fill="none" stroke="#5F6AC4" strokeWidth={3} d={edgePath} />
-            <circle
-                cx={toX}
-                cy={toY}
-                fill="#fff"
-                r={5}
-                stroke="#5F6AC4"
-                strokeWidth={1.5}
-            />
+            <Circle x={fromX} y={fromY} />
+
+            <path fill="none" stroke="#5F6AC4" strokeWidth={2.5} d={edgePath} />
+
+            <Arrow x={toX} y={toY} />
         </g>
     )
 }
