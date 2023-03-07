@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useState } from 'react'
+import React, { memo, useCallback, useState } from 'react'
 import {
     ControlButton,
     ReactFlowInstance,
@@ -111,4 +111,4 @@ const EditableZoomInput: React.FC<IEditableZoomInput> = ({
     )
 }
 
-export default EditableZoomInput
+export default memo(EditableZoomInput)
