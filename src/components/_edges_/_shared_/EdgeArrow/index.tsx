@@ -7,8 +7,8 @@ const EdgeArrow: React.FC<IEdgeArrow> = (props) => {
         <svg
             viewBox="0 0 8 8"
             xmlns="http://www.w3.org/2000/svg"
-            x={props.x - 8}
-            y={props.y - 12}
+            x={props.x}
+            y={props.y}
             width={15}
             height={15}
             fill="none"

@@ -5,12 +5,12 @@ type IEdgeCircle = { x: number; y: number }
 const EdgeCircle: React.FC<IEdgeCircle> = (props) => {
     return (
         <svg
-            x={props.x - 8}
-            y={props.y - 12}
+            x={props.x}
+            y={props.y}
             width={15}
             height={15}
             viewBox="0 0 8 8"
-            fill="none"
+            fill="#ffffff"
             xmlns="http://www.w3.org/2000/svg"
         >
             <path

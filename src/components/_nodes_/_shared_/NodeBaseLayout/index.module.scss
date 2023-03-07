@@ -72,14 +72,8 @@
 }
 
 .footer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    gap: 1rem;
-    align-items: center;
-    background-color: transparent;
-
-    & * {
-        width: 100%;
-    }
+    display: grid;
+    grid-template-rows: 1;
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    grid-column-gap: 0.5rem;
 }

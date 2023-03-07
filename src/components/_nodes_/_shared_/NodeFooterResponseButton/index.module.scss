@@ -1,12 +1,27 @@
 .wrapper {
     position: relative;
-    cursor: pointer;
+    width: 100%;
+    background-color: white;
+    border-radius: 0.5rem;
+    border: 0;
+    transition: all 0.2s ease;
+
+    &:hover {
+        background-color: #f4f4f4;
+    }
 }
 
-.button {
-    background-color: white;
+.handle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: auto;
+    height: auto;
+    background-color: transparent;
     border: 0;
     padding: 1rem;
-    border-radius: 0.5rem;
-    cursor: pointer;
+
+    position: relative;
+    bottom: unset;
 }
