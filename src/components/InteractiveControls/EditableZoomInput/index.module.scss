@@ -1,0 +1,36 @@
+.input {
+    max-width: 30px;
+    position: relative;
+    background-color: transparent;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    outline: #5f6ac4 solid 1px;
+    font-size: 15px;
+    font-weight: lighter;
+}
+
+
+.zoomContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: #f0f1f9;
+    border-radius: 2rem;
+
+    & p {
+        margin: 0;
+        font-weight: lighter;
+        color: #5f6ac4;
+    }
+
+    & .disabledControlButton {
+        & svg {
+            transform: scale(1.5);
+
+            & path {
+                fill: #a1a1a1;
+            }
+        }
+    }
+}

@@ -1,31 +1,35 @@
 import React from 'react'
-import { Controls as ControlsRF, ControlButton, PanelPosition } from 'reactflow'
+import { Controls as ControlsRF, ControlButton } from 'reactflow'
 
 import { ReactComponent as WarningIcon } from '@/assets/icons/warning.svg'
 import { ReactComponent as MessageIcon } from '@/assets/icons/message.svg'
 
+import EditableZoomInput from '@/components/InteractiveControls/EditableZoomInput'
+
+import { useApp } from '@/providers/AppProvider'
+
 import styles from './index.module.scss'
 
-const PANEL_POSITION = 'bottom-right' as PanelPosition
-
-const SHOW_FIT_VIEW_BUTTON = false
-
-const SHOW_INTERACTIVE_BUTTON = false
-
 const InteractiveControls: React.FC = () => {
+    const { reactFlowInstance } = useApp()
+
     return (
         <ControlsRF
-            showFitView={SHOW_FIT_VIEW_BUTTON}
-            showInteractive={SHOW_INTERACTIVE_BUTTON}
-            position={PANEL_POSITION}
+            showZoom={false}
+            showFitView={false}
+            showInteractive={false}
+            position="bottom-right"
             className={styles.controlsContainer}
         >
             <ControlButton onClick={() => alert('pressed on warning icon')}>
                 <WarningIcon aria-label="Warning Icon" />
             </ControlButton>
+
             <ControlButton onClick={() => alert('pressed on message icon')}>
                 <MessageIcon aria-label="Message Icon" />
             </ControlButton>
+
+            <EditableZoomInput reactFlowInstance={reactFlowInstance} />
         </ControlsRF>
     )
 }
