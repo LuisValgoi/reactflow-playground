@@ -35,6 +35,7 @@ const Flow: React.FC<ReactFlowProps> = ({ children, ...rest }) => {
     const [edges, setEdges, onEdgesChange] = useEdgesState([])
 
     const onConnect = useCallback((connection: Connection) => {
+        setNodes((nodes) => nodes.map(node => ({ ...node, selected: false })))
         setEdges((existingEdges) => {
             const newEdge = { ...connection, type: IEdgeType.DEFAULT } as Edge
             return addEdge(newEdge, existingEdges)

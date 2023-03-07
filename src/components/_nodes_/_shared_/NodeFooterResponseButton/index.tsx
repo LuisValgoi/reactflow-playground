@@ -18,6 +18,7 @@ const NodeFooterResponseButton: React.FC<INodeFooterResponseButton> = ({
 }) => {
     return (
         <div className={styles.wrapper} tabIndex={0}>
+            <span className={styles.dot} />
             <Handle
                 id={handleId}
                 className={classNames(styles.handle)}
