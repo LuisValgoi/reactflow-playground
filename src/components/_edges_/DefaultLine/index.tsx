@@ -25,7 +25,7 @@ const DefaultLine: React.FC<ConnectionLineComponentProps> = ({
         <g>
             <EdgeCircle x={fromX} y={fromY + 5} />
 
-            <path fill="none" stroke="#5F6AC4" strokeWidth={2.5} d={edgePath} />
+            <path fill="none" className='animated' stroke="#5F6AC4" strokeWidth={2.5} d={edgePath} />
 
             <EdgeArrow x={toX} y={toY - 5} />
         </g>
