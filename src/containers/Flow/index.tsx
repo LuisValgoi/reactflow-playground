@@ -35,10 +35,8 @@ const Flow: React.FC<ReactFlowProps> = ({ children, ...rest }) => {
     const [edges, setEdges, onEdgesChange] = useEdgesState([])
 
     const onConnect = useCallback((connection: Connection) => {
-        setEdges((existingEdges) => {
-            const newEdge = { ...connection, type: IEdgeType.DEFAULT } as Edge
-            return addEdge(newEdge, existingEdges)
-        })
+        setNodes((nodes) => nodes.map((node) => ({ ...node, selected: false })))
+        setEdges((edges) => addEdge(connection, edges))
     }, [])
 
     const onDragOver = useCallback((event: DragEvent<HTMLElement>) => {
@@ -72,6 +70,7 @@ const Flow: React.FC<ReactFlowProps> = ({ children, ...rest }) => {
             minZoom={MIN_ZOOM}
             nodeTypes={nodeTypes}
             edgeTypes={edgeTypes}
+            defaultEdgeOptions={{ type: IEdgeType.DEFAULT }}
             connectionLineComponent={edgeLines}
             panOnScroll={true}
             zoomOnScroll={false}

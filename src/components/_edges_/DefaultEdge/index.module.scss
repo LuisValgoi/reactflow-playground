@@ -1,13 +1,7 @@
 .path:hover {
-    stroke-width: 4 !important;
+    stroke-width: 4;
 }
 
-.pathSelector:hover {
-    cursor: pointer !important;
-}
-
-.pathSelector:hover + .path,
-.path:hover {
-    stroke-width: 4 !important;
-    cursor: pointer !important;
+.pathSelector:hover + .path {
+    stroke-width: 4;
 }

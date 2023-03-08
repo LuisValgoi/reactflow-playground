@@ -1,12 +1,12 @@
 import { IMessage } from '@/interfaces'
 import { memo } from 'react'
-import { Handle, NodeProps, Position } from 'reactflow'
+import { Connection, Handle, NodeProps, Position } from 'reactflow'
 
 import NodesBaseLayout from '@/components/_nodes_/_shared_/NodeBaseLayout'
 
-type IDefaultNode = NodeProps<IMessage>
+type IDefaultNode = NodeProps<IMessage> & { footer?: JSX.Element }
 
-const DefaultNode = ({ ...restProps }: IDefaultNode) => {
+const DefaultNode = ({ footer, ...restProps }: IDefaultNode) => {
     return (
         <NodesBaseLayout
             // {...restProps}
@@ -14,13 +14,18 @@ const DefaultNode = ({ ...restProps }: IDefaultNode) => {
             selected={restProps.selected}
             heading={restProps.data.heading}
             content={restProps.data.content}
+            schedulingInfo={`${restProps.data.scheduleInfo.week} - ${restProps.data.scheduleInfo.date}`}
             hideControls={false}
+            footer={footer}
             handle={
                 <>
                     <Handle
+                        id={`custom-handle-id-${restProps.id}`}
+                        className="nodrag react-flow__handle-valid"
                         type="target"
                         position={Position.Top}
                         isConnectable
+                        isValidConnection={(connection: Connection) => true}
                     />
                 </>
             }

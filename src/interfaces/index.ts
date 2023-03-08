@@ -12,4 +12,8 @@ export type IMessage = {
     heading: string
     content: string
     type: INodeType
+    scheduleInfo: {
+        week: string
+        date: string
+    }
 }

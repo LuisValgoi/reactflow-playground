@@ -101,30 +101,50 @@ export function AppProvider({ children }: { children: JSX.Element }) {
             {
                 heading: 'USER-08433-Q',
                 type: INodeType.ABC,
+                scheduleInfo: {
+                    week: "W1",
+                    date: "MONDAY 9:00 AM"
+                },
                 content:
                     'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
             },
             {
                 heading: 'USER-08434-Q',
                 type: INodeType.YN,
+                scheduleInfo: {
+                    week: "W2",
+                    date: "IMMEDIATE"
+                },
                 content:
                     'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
             },
             {
                 heading: 'USER-08435-Q',
                 type: INodeType.DEFAULT,
+                scheduleInfo: {
+                    week: "W4",
+                    date: "IMMEDIATE"
+                },
                 content:
                     'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
             },
             {
                 heading: 'USER-08436-Q',
                 type: INodeType.DEFAULT,
+                scheduleInfo: {
+                    week: "W5",
+                    date: "IMMEDIATE"
+                },
                 content:
                     'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
             },
             {
                 heading: 'USER-08437-Q',
                 type: INodeType.DEFAULT,
+                scheduleInfo: {
+                    week: "W6",
+                    date: "IMMEDIATE"
+                },
                 content:
                     'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
             },

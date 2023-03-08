@@ -15,6 +15,7 @@ import styles from './index.module.scss'
 type INodesBaseLayout<T extends keyof JSX.IntrinsicElements> = {
     id: string
     heading: string
+    schedulingInfo?: string
     content: string
     footer?: JSX.Element
     handle?: JSX.Element
@@ -27,6 +28,7 @@ type INodesBaseLayout<T extends keyof JSX.IntrinsicElements> = {
 const NodesBaseLayout = <T extends keyof JSX.IntrinsicElements>({
     id,
     heading,
+    schedulingInfo,
     content,
     footer,
     handle,
@@ -67,6 +69,8 @@ const NodesBaseLayout = <T extends keyof JSX.IntrinsicElements>({
 
             <div className={styles.head}>
                 <p>{heading}</p>
+
+                {schedulingInfo && <p className={styles.tag}>{schedulingInfo}</p>}
 
                 {!hideControls && (
                     <div className={styles.headActions}>

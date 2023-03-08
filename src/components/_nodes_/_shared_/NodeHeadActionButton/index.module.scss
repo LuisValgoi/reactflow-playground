@@ -2,7 +2,7 @@
     border: unset;
     border-radius: 50%;
     padding: 0.5rem;
-    background-color: white;
+    background-color: #EBECF8;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,9 +12,13 @@
         background-color: #f4f4f4;
     }
 
+    &:focus {
+        outline: #5f6ac4 solid 2px;
+    }
+
     & svg {
         & path {
-            fill: #5f6ac4;
+            fill: #272F6A;
         }
     }
 }

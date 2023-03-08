@@ -14,25 +14,20 @@ const NodeFooterResponseButton: React.FC<INodeFooterResponseButton> = ({
     handleType,
     handlePosition,
     handleId,
-    className,
     children,
-    ...restProps
 }) => {
     return (
-        <div className={styles.wrapper}>
-            <button
-                tabIndex={0}
-                className={classNames(styles.button, className)}
-                {...restProps}
-            >
-                {children}
-            </button>
+        <div className={styles.wrapper} tabIndex={0}>
+            <span className={styles.dot} />
             <Handle
                 id={handleId}
+                className={classNames(styles.handle)}
                 type={handleType}
                 position={handlePosition}
                 isConnectable
-            />
+            >
+                {children}
+            </Handle>
         </div>
     )
 }

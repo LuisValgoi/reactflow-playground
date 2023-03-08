@@ -1,30 +1,16 @@
 import { IMessage } from '@/interfaces'
 import { memo } from 'react'
-import { Handle, NodeProps, Position } from 'reactflow'
+import { NodeProps, Position } from 'reactflow'
 
-import NodesBaseLayout from '@/components/_nodes_/_shared_/NodeBaseLayout'
+import DefaultNode from '@/components/_nodes_/DefaultNode'
 import NodeFooterResponseButton from '@/components/_nodes_/_shared_/NodeFooterResponseButton'
 
 type IYNNode = NodeProps<IMessage>
 
 const YNNode = ({ ...restProps }: IYNNode) => {
     return (
-        <NodesBaseLayout
-            // {...restProps}
-            id={restProps.id}
-            selected={restProps.selected}
-            heading={restProps.data.heading}
-            content={restProps.data.content}
-            hideControls={false}
-            handle={
-                <>
-                    <Handle
-                        type="target"
-                        position={Position.Top}
-                        isConnectable
-                    />
-                </>
-            }
+        <DefaultNode
+            {...restProps}
             footer={
                 <>
                     <NodeFooterResponseButton

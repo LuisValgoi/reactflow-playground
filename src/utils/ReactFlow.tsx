@@ -48,8 +48,9 @@ const getNodeStructure = (
             label: `${data.type} testing`,
             heading: data.heading,
             content: data.content,
+            scheduleInfo: data.scheduleInfo,
             type: data.type,
-        },
+        } as IMessage,
     }
 }
 

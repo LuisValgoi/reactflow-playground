@@ -17,17 +17,33 @@
     }
 
     &.selected {
-        outline: #969cc7 solid 2px;
+        outline: #5f6ac4 solid 2px;
+    }
+
+    &:focus {
+        outline: #5f6ac4 solid 2px;
     }
 }
 
 .handleWrapper {
     position: absolute;
-    top: 0;
-    left: 50%;
+    top: -2px;
+    left: 0;
     display: block;
-    opacity: 0;
+    opacity: 0.5;
     transition: all 0.2s ease;
+    width: 100%;
+
+    & > div {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        bottom: -4px;
+        left: calc(50% - 5px);
+        background: #ebecf8;
+        border: 0.5px solid #8790d3;
+        border-radius: 2px;
+    }
 }
 
 .container:hover .handleWrapper {
@@ -36,7 +52,7 @@
 
 .head {
     background-color: #afb5e1;
-    padding: 1rem;
+    padding: 0.5rem 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -51,6 +67,13 @@
     & div {
         margin: 0;
         justify-content: flex-end;
+    }
+
+    & p.tag {
+        padding: 0.25rem 1rem;
+        background-color: white;
+        border-radius: 2rem;
+        font-size: 12px;
     }
 }
 
@@ -72,14 +95,8 @@
 }
 
 .footer {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    gap: 1rem;
-    align-items: center;
-    background-color: transparent;
-
-    & * {
-        width: 100%;
-    }
+    display: grid;
+    grid-template-rows: 1;
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    grid-column-gap: 0.5rem;
 }

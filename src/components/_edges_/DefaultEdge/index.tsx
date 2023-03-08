@@ -1,11 +1,20 @@
 import React, { MouseEvent, useCallback } from 'react'
-import { EdgeProps, getBezierPath } from 'reactflow'
+import { EdgeProps, getSmoothStepPath } from 'reactflow'
 import { useApp } from '@/providers/AppProvider'
 
 import EdgeArrow from '@/components/_edges_/_shared_/EdgeArrow'
 import EdgeCircle from '@/components/_edges_/_shared_/EdgeCircle'
 
 import styles from './index.module.scss'
+
+const MISSING_PIXELS_CIRCLE_X = 8
+const MISSING_PIXELS_CIRCLE_Y = 8
+const MISSING_PIXELS_CIRCLE_Y_PATH = 5
+
+const MISSING_PIXELS_ARROW_X = 8
+const MISSING_PIXELS_ARROW_Y = 11
+
+const LINE_CURVATURE = 30
 
 const DefaultEdge: React.FC<EdgeProps> = ({
     id,
@@ -18,13 +27,14 @@ const DefaultEdge: React.FC<EdgeProps> = ({
 }: EdgeProps) => {
     const { removeEdge } = useApp()
 
-    const [edgePath] = getBezierPath({
+    const [edgePath] = getSmoothStepPath({
         sourceX,
-        sourceY,
+        sourceY: sourceY + MISSING_PIXELS_CIRCLE_Y_PATH,
         sourcePosition,
         targetX,
         targetY,
         targetPosition,
+        borderRadius: LINE_CURVATURE,
     })
 
     const onDoubleClick = useCallback(
@@ -37,7 +47,10 @@ const DefaultEdge: React.FC<EdgeProps> = ({
 
     return (
         <g>
-            <EdgeCircle x={sourceX} y={sourceY} />
+            <EdgeCircle
+                x={sourceX - MISSING_PIXELS_CIRCLE_X}
+                y={sourceY - MISSING_PIXELS_CIRCLE_Y}
+            />
 
             <path
                 d={edgePath}
@@ -52,13 +65,16 @@ const DefaultEdge: React.FC<EdgeProps> = ({
                 d={edgePath}
                 id={id}
                 fill="none"
-                stroke="#5F6AC4"
+                stroke="#3B479F"
                 strokeWidth={2.5}
                 onDoubleClick={(event) => onDoubleClick(event, id)}
                 className={styles.path}
             />
 
-            <EdgeArrow x={targetX} y={targetY} />
+            <EdgeArrow
+                x={targetX - MISSING_PIXELS_ARROW_X}
+                y={targetY - MISSING_PIXELS_ARROW_Y}
+            />
         </g>
     )
 }
