@@ -14,6 +14,7 @@ const DefaultNode = ({ footer, ...restProps }: IDefaultNode) => {
             selected={restProps.selected}
             heading={restProps.data.heading}
             content={restProps.data.content}
+            schedulingInfo={`${restProps.data.scheduleInfo.week} - ${restProps.data.scheduleInfo.date}`}
             hideControls={false}
             footer={footer}
             handle={
