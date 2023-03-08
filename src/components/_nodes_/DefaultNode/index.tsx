@@ -4,7 +4,7 @@ import { Connection, Handle, NodeProps, Position } from 'reactflow'
 
 import NodesBaseLayout from '@/components/_nodes_/_shared_/NodeBaseLayout'
 
-type IDefaultNode = NodeProps<IMessage> & { footer?: JSX.Element}
+type IDefaultNode = NodeProps<IMessage> & { footer?: JSX.Element }
 
 const DefaultNode = ({ footer, ...restProps }: IDefaultNode) => {
     return (
@@ -20,7 +20,7 @@ const DefaultNode = ({ footer, ...restProps }: IDefaultNode) => {
                 <>
                     <Handle
                         id={`custom-handle-id-${restProps.id}`}
-                        className='nodrag react-flow__handle-valid'
+                        className="nodrag react-flow__handle-valid"
                         type="target"
                         position={Position.Top}
                         isConnectable

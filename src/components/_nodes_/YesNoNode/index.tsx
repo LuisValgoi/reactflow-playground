@@ -13,20 +13,20 @@ const YNNode = ({ ...restProps }: IYNNode) => {
             {...restProps}
             footer={
                 <>
-                <NodeFooterResponseButton
-                    handleId="yes"
-                    handlePosition={Position.Bottom}
-                    handleType="source"
-                >
-                    Yes
-                </NodeFooterResponseButton>
-                <NodeFooterResponseButton
-                    handleId="no"
-                    handlePosition={Position.Bottom}
-                    handleType="source"
-                >
-                    No
-                </NodeFooterResponseButton>
+                    <NodeFooterResponseButton
+                        handleId="yes"
+                        handlePosition={Position.Bottom}
+                        handleType="source"
+                    >
+                        Yes
+                    </NodeFooterResponseButton>
+                    <NodeFooterResponseButton
+                        handleId="no"
+                        handlePosition={Position.Bottom}
+                        handleType="source"
+                    >
+                        No
+                    </NodeFooterResponseButton>
                 </>
             }
         />

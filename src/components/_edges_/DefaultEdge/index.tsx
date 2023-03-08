@@ -7,7 +7,6 @@ import EdgeCircle from '@/components/_edges_/_shared_/EdgeCircle'
 
 import styles from './index.module.scss'
 
-
 const MISSING_PIXELS_CIRCLE_X = 8
 const MISSING_PIXELS_CIRCLE_Y = 8
 const MISSING_PIXELS_CIRCLE_Y_PATH = 5
@@ -48,7 +47,10 @@ const DefaultEdge: React.FC<EdgeProps> = ({
 
     return (
         <g>
-            <EdgeCircle x={sourceX - MISSING_PIXELS_CIRCLE_X} y={sourceY - MISSING_PIXELS_CIRCLE_Y} />
+            <EdgeCircle
+                x={sourceX - MISSING_PIXELS_CIRCLE_X}
+                y={sourceY - MISSING_PIXELS_CIRCLE_Y}
+            />
 
             <path
                 d={edgePath}
@@ -69,7 +71,10 @@ const DefaultEdge: React.FC<EdgeProps> = ({
                 className={styles.path}
             />
 
-            <EdgeArrow x={targetX - MISSING_PIXELS_ARROW_X} y={targetY - MISSING_PIXELS_ARROW_Y} />
+            <EdgeArrow
+                x={targetX - MISSING_PIXELS_ARROW_X}
+                y={targetY - MISSING_PIXELS_ARROW_Y}
+            />
         </g>
     )
 }

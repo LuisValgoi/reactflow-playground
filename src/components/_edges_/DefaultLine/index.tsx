@@ -32,11 +32,23 @@ const DefaultLine: React.FC<ConnectionLineComponentProps> = ({
 
     return (
         <g>
-            <EdgeCircle x={fromX - MISSING_PIXELS_CIRCLE_X} y={fromY + MISSING_PIXELS_CIRCLE_Y} />
+            <EdgeCircle
+                x={fromX - MISSING_PIXELS_CIRCLE_X}
+                y={fromY + MISSING_PIXELS_CIRCLE_Y}
+            />
 
-            <path fill="none" className='animated' stroke="#3B479F" strokeWidth={2.5} d={edgePath} />
+            <path
+                fill="none"
+                className="animated"
+                stroke="#3B479F"
+                strokeWidth={2.5}
+                d={edgePath}
+            />
 
-            <EdgeArrow x={toX - MISSING_PIXELS_ARROW_X} y={toY - MISSING_PIXELS_ARROW_Y} />
+            <EdgeArrow
+                x={toX - MISSING_PIXELS_ARROW_X}
+                y={toY - MISSING_PIXELS_ARROW_Y}
+            />
         </g>
     )
 }
