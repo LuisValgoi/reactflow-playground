@@ -29,6 +29,7 @@ const Messages: React.FC<IMessages> = ({ data }) => {
                     id={message.heading}
                     as="li"
                     draggable
+                    isOnCanvas={false}
                     key={message.heading}
                     heading={message.heading}
                     content={message.content}

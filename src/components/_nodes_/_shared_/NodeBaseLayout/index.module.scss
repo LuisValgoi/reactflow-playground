@@ -19,7 +19,9 @@
     &.selected {
         outline: #5f6ac4 solid 2px;
     }
+}
 
+.container.isOnCanvas {
     &:focus {
         outline: #5f6ac4 solid 2px;
     }

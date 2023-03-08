@@ -22,6 +22,7 @@ type INodesBaseLayout<T extends keyof JSX.IntrinsicElements> = {
     hideControls?: boolean
     selected?: boolean
     isConnectable?: boolean
+    isOnCanvas?: boolean
     as?: keyof JSX.IntrinsicElements
 } & JSX.IntrinsicElements[T]
 
@@ -35,6 +36,7 @@ const NodesBaseLayout = <T extends keyof JSX.IntrinsicElements>({
     hideControls = true,
     selected,
     isConnectable = true,
+    isOnCanvas = true,
     as = 'div',
     className,
     children,
