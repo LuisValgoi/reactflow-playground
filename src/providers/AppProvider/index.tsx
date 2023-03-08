@@ -46,17 +46,17 @@ export function AppProvider({ children }: { children: JSX.Element }) {
 
     const { canvasId } = useParams<{ canvasId: string }>()
 
-    const initialCanvasName = useAppInitialName(canvasId)
-
-    const navigate = useNavigate()
-
     const { deleteElements } = useReactFlow()
 
     const [rfInstance, setRfInstance] = useState<ReactFlowInstance>()
 
+    const initialCanvasName = useAppInitialName(canvasId)
+
     const [canvasName, setCanvasName] = useState(initialCanvasName)
 
-    const defaultViewPort = useAppViewport(canvasName)
+    const navigate = useNavigate()
+
+    const defaultViewPort = useAppViewport(canvasId)
 
     const messages = useAppMessages()
 
@@ -118,21 +118,30 @@ function useAppInitialName(canvasId: string | undefined) {
     return useMemo(() => canvasId || `${new Date().getTime()}`, [canvasId])
 }
 
-function useAppViewport(canvasName: string) {
+function useAppCanvasData(canvasId: string | undefined) {
+    const canvasName = useAppInitialName(canvasId)
+    const canvasNameKey = snakeCase(canvasName)
+    const canvasObjectRaw = localStorage.getItem(canvasNameKey)
+    if (!canvasObjectRaw) {
+        return undefined
+    }
+
+    return JSON.parse(canvasObjectRaw) as ReactFlowJsonObject
+}
+
+function useAppViewport(canvasId: string | undefined) {
+    const canvasData = useAppCanvasData(canvasId)
+
     const defaultViewPort = useMemo(() => {
-        const canvasNameKey = snakeCase(canvasName)
-        const canvasObjectRaw = localStorage.getItem(canvasNameKey)
-        if (!canvasObjectRaw) {
+        if (!canvasData) {
             return {
                 x: DEFAULT_ZOOM,
                 y: DEFAULT_ZOOM,
                 zoom: DEFAULT_ZOOM,
             } as Viewport
         }
-
-        const canvasObject = JSON.parse(canvasObjectRaw) as ReactFlowJsonObject
-        return canvasObject.viewport
-    }, [canvasName])
+        return canvasData.viewport
+    }, [canvasId])
 
     return defaultViewPort
 }
@@ -195,4 +204,22 @@ function useAppMessages() {
     )
 
     return messages
+}
+
+export function useAppLoadDetailData(canvasId: string | undefined) {
+    const { setViewport, setNodes, setEdges } = useReactFlow()
+
+    useEffect(() => {
+        const canvasDataRaw = localStorage.getItem(canvasId!)
+        if (!canvasDataRaw) {
+            return
+        }
+
+        const canvasData = JSON.parse(canvasDataRaw!) as ReactFlowJsonObject
+
+        const { x = 0, y = 0, zoom = 1 } = canvasData.viewport
+        setNodes(canvasData.nodes || [])
+        setEdges(canvasData.edges || [])
+        setViewport({ x, y, zoom })
+    }, [])
 }
