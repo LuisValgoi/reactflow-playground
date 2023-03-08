@@ -17,7 +17,11 @@
     }
 
     &.selected {
-        outline: #969cc7 solid 2px;
+        outline: #5f6ac4 solid 2px;
+    }
+
+    &:focus {
+        outline: #5f6ac4 solid 2px;
     }
 }
 
@@ -63,6 +67,13 @@
     & div {
         margin: 0;
         justify-content: flex-end;
+    }
+
+    & p.tag {
+        padding: 0.25rem 1rem;
+        background-color: white;
+        border-radius: 2rem;
+        font-size: 12px;
     }
 }
 
