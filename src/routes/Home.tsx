@@ -8,20 +8,16 @@ import TopBarControls from '@/components/TopBarControls'
 
 import Flow from '@/containers/Flow'
 
-import { AppProvider } from '@/providers/AppProvider'
-
 const Home: React.FC = () => {
     return (
-        <AppProvider>
-            <Skeleton>
-                <Flow>
-                    <Background />
-                    <InteractiveControls />
-                    <TopBarControls />
-                    <SidebarControls />
-                </Flow>
-            </Skeleton>
-        </AppProvider>
+        <Skeleton>
+            <Flow>
+                <Background />
+                <InteractiveControls />
+                <TopBarControls />
+                <SidebarControls />
+            </Flow>
+        </Skeleton>
     )
 }
 

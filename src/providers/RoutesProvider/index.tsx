@@ -4,17 +4,26 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from '@/routes/Home'
 import ErrorPage from '@/routes/ErrorPage'
 import Detail from '@/routes/Detail'
+import { AppProvider } from '../AppProvider'
 
 const RoutesProvider: React.FC = () => {
     const router = createBrowserRouter([
         {
             path: '/',
-            element: <Home />,
+            element: (
+                <AppProvider>
+                    <Home />
+                </AppProvider>
+            ),
             errorElement: <ErrorPage />,
         },
         {
             path: '/:canvasId',
-            element: <Detail />,
+            element: (
+                <AppProvider>
+                    <Detail />
+                </AppProvider>
+            ),
             errorElement: <ErrorPage />,
         },
     ])

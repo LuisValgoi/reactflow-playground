@@ -6,6 +6,7 @@ import {
     SetStateAction,
     useCallback,
     useContext,
+    useEffect,
     useMemo,
     useRef,
     useState,
@@ -45,10 +46,7 @@ export function AppProvider({ children }: { children: JSX.Element }) {
 
     const { canvasId } = useParams<{ canvasId: string }>()
 
-    const initialCanvasName = useMemo(
-        () => canvasId || `${new Date().getTime()}`,
-        [canvasId]
-    )
+    const initialCanvasName = useAppInitialName(canvasId)
 
     const navigate = useNavigate()
 
@@ -58,20 +56,9 @@ export function AppProvider({ children }: { children: JSX.Element }) {
 
     const [canvasName, setCanvasName] = useState(initialCanvasName)
 
-    const defaultViewPort = useMemo(() => {
-        const canvasNameKey = snakeCase(canvasName)
-        const canvasObjectRaw = localStorage.getItem(canvasNameKey)
-        if (!canvasObjectRaw) {
-            return {
-                x: DEFAULT_ZOOM,
-                y: DEFAULT_ZOOM,
-                zoom: DEFAULT_ZOOM,
-            } as Viewport
-        }
+    const defaultViewPort = useAppViewport(canvasName)
 
-        const canvasObject = JSON.parse(canvasObjectRaw) as ReactFlowJsonObject
-        return canvasObject.viewport
-    }, [canvasName])
+    const messages = useAppMessages()
 
     const saveCanvas = useCallback(() => {
         const canvasNameKey = snakeCase(canvasName)
@@ -95,62 +82,6 @@ export function AppProvider({ children }: { children: JSX.Element }) {
     const removeEdge = useCallback((edgeId: string) => {
         deleteElements({ edges: [{ id: edgeId }] })
     }, [])
-
-    const messages: IMessage[] = useMemo(
-        () => [
-            {
-                heading: 'USER-08433-Q',
-                type: INodeType.ABC,
-                scheduleInfo: {
-                    week: "W1",
-                    date: "MONDAY 9:00 AM"
-                },
-                content:
-                    'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
-            },
-            {
-                heading: 'USER-08434-Q',
-                type: INodeType.YN,
-                scheduleInfo: {
-                    week: "W2",
-                    date: "IMMEDIATE"
-                },
-                content:
-                    'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
-            },
-            {
-                heading: 'USER-08435-Q',
-                type: INodeType.DEFAULT,
-                scheduleInfo: {
-                    week: "W4",
-                    date: "IMMEDIATE"
-                },
-                content:
-                    'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
-            },
-            {
-                heading: 'USER-08436-Q',
-                type: INodeType.DEFAULT,
-                scheduleInfo: {
-                    week: "W5",
-                    date: "IMMEDIATE"
-                },
-                content:
-                    'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
-            },
-            {
-                heading: 'USER-08437-Q',
-                type: INodeType.DEFAULT,
-                scheduleInfo: {
-                    week: "W6",
-                    date: "IMMEDIATE"
-                },
-                content:
-                    'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
-            },
-        ],
-        []
-    )
 
     return (
         <AppContext.Provider
@@ -181,4 +112,87 @@ export function useApp() {
     }
 
     return context
+}
+
+function useAppInitialName(canvasId: string | undefined) {
+    return useMemo(() => canvasId || `${new Date().getTime()}`, [canvasId])
+}
+
+function useAppViewport(canvasName: string) {
+    const defaultViewPort = useMemo(() => {
+        const canvasNameKey = snakeCase(canvasName)
+        const canvasObjectRaw = localStorage.getItem(canvasNameKey)
+        if (!canvasObjectRaw) {
+            return {
+                x: DEFAULT_ZOOM,
+                y: DEFAULT_ZOOM,
+                zoom: DEFAULT_ZOOM,
+            } as Viewport
+        }
+
+        const canvasObject = JSON.parse(canvasObjectRaw) as ReactFlowJsonObject
+        return canvasObject.viewport
+    }, [canvasName])
+
+    return defaultViewPort
+}
+
+function useAppMessages() {
+    const messages: IMessage[] = useMemo(
+        () => [
+            {
+                heading: 'USER-08433-Q',
+                type: INodeType.ABC,
+                scheduleInfo: {
+                    week: 'W1',
+                    date: 'MONDAY 9:00 AM',
+                },
+                content:
+                    'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
+            },
+            {
+                heading: 'USER-08434-Q',
+                type: INodeType.YN,
+                scheduleInfo: {
+                    week: 'W2',
+                    date: 'IMMEDIATE',
+                },
+                content:
+                    'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
+            },
+            {
+                heading: 'USER-08435-Q',
+                type: INodeType.DEFAULT,
+                scheduleInfo: {
+                    week: 'W4',
+                    date: 'IMMEDIATE',
+                },
+                content:
+                    'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
+            },
+            {
+                heading: 'USER-08436-Q',
+                type: INodeType.DEFAULT,
+                scheduleInfo: {
+                    week: 'W5',
+                    date: 'IMMEDIATE',
+                },
+                content:
+                    'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
+            },
+            {
+                heading: 'USER-08437-Q',
+                type: INodeType.DEFAULT,
+                scheduleInfo: {
+                    week: 'W6',
+                    date: 'IMMEDIATE',
+                },
+                content:
+                    'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
+            },
+        ],
+        []
+    )
+
+    return messages
 }
