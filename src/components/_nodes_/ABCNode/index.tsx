@@ -1,30 +1,16 @@
 import { IMessage } from '@/interfaces'
 import { memo } from 'react'
-import { Handle, NodeProps, Position } from 'reactflow'
+import { NodeProps, Position } from 'reactflow'
 
-import NodesBaseLayout from '@/components/_nodes_/_shared_/NodeBaseLayout'
 import NodeFooterResponseButton from '@/components/_nodes_/_shared_/NodeFooterResponseButton'
+import DefaultNode from '@/components/_nodes_/DefaultNode'
 
 type IABCNode = NodeProps<IMessage>
 
 const ABCNode = ({ ...restProps }: IABCNode) => {
     return (
-        <NodesBaseLayout
-            // {...restProps}
-            id={restProps.id}
-            selected={restProps.selected}
-            heading={restProps.data.heading}
-            content={restProps.data.content}
-            hideControls={false}
-            handle={
-                <>
-                    <Handle
-                        type="target"
-                        position={Position.Top}
-                        isConnectable
-                    />
-                </>
-            }
+        <DefaultNode
+            {...restProps}
             footer={
                 <>
                     <NodeFooterResponseButton
