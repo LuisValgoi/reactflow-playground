@@ -1,11 +1,11 @@
-import { IMessage } from '@/interfaces'
+import { INodeData } from '@/interfaces'
 import { memo } from 'react'
 import { NodeProps, Position } from 'reactflow'
 
 import NodeFooterResponseButton from '@/components/_nodes_/_shared_/NodeFooterResponseButton'
 import DefaultNode from '@/components/_nodes_/DefaultNode'
 
-type IABCNode = NodeProps<IMessage>
+type IABCNode = NodeProps<INodeData>
 
 const ABCNode = ({ ...restProps }: IABCNode) => {
     return (

@@ -1,0 +1,88 @@
+.wrapper {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    & h1 {
+        margin: 0;
+    }
+}
+
+.navBarWrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.navBarTitle {
+    font-weight: normal;
+    position: relative;
+    margin: 0.5rem 0;
+    cursor: pointer;
+    border-bottom-color: gainsboro;
+    border-bottom-style: solid;
+    transition: all 0.2s ease;
+
+    &:hover {
+        border-bottom-color: black;
+        border-bottom-style: solid;
+    }
+
+    &.navBarTitleSelected {
+        border-bottom-color: black;
+        border-bottom-style: solid;
+    }
+}
+
+.navBarIndicator {
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100px;
+    height: 3px;
+    border-radius: 0.5rem;
+    background-color: gray;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.formItem {
+    width: 100%;
+    width: -moz-available;
+    width: -webkit-fill-available;
+    width: fill-available;
+
+    & input,
+    textarea,
+    select {
+        width: 100%;
+        width: -moz-available;
+        width: -webkit-fill-available;
+        width: fill-available;
+    }
+
+    & label {
+        margin-bottom: 0.5rem;
+    }
+}
+
+.formItemActions {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: end;
+
+    & button {
+        min-width: 100px;
+    }
+}
+
+.invalid {
+    margin: 0;
+    color: red;
+}

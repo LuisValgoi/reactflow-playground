@@ -1,9 +1,11 @@
-import React, { MouseEvent, useCallback } from 'react'
-import { EdgeProps, getSmoothStepPath } from 'reactflow'
+import React, { MouseEvent, useCallback, useMemo } from 'react'
+import { EdgeLabelRenderer, EdgeProps, getSmoothStepPath } from 'reactflow'
 import { useApp } from '@/providers/AppProvider'
 
 import EdgeArrow from '@/components/_edges_/_shared_/EdgeArrow'
 import EdgeCircle from '@/components/_edges_/_shared_/EdgeCircle'
+import EditableEdgeLabel from '@/components/_edges_/_shared_/EditableEdgeLabel'
+import defaultEdgeInfos from '@/components/_edges_/edgeInfos'
 
 import styles from './index.module.scss'
 
@@ -13,6 +15,8 @@ const MISSING_PIXELS_CIRCLE_Y_PATH = 5
 
 const MISSING_PIXELS_ARROW_X = 8
 const MISSING_PIXELS_ARROW_Y = 11
+
+const MISSING_PIXELS_LABEL_Y = MISSING_PIXELS_ARROW_Y * 4.5
 
 const LINE_CURVATURE = 30
 
@@ -24,6 +28,7 @@ const DefaultEdge: React.FC<EdgeProps> = ({
     targetY,
     sourcePosition,
     targetPosition,
+    data,
 }: EdgeProps) => {
     const { removeEdge } = useApp()
 
@@ -36,6 +41,14 @@ const DefaultEdge: React.FC<EdgeProps> = ({
         targetPosition,
         borderRadius: LINE_CURVATURE,
     })
+
+    const edgeLabelTransform = useMemo(
+        () =>
+            `translate(-50%, 0%) translate(${targetX}px,${
+                targetY - MISSING_PIXELS_LABEL_Y
+            }px)`,
+        [targetX, targetY]
+    )
 
     const onDoubleClick = useCallback(
         (event: MouseEvent<SVGPathElement>, id: string) => {
@@ -67,9 +80,16 @@ const DefaultEdge: React.FC<EdgeProps> = ({
                 fill="none"
                 stroke="#3B479F"
                 strokeWidth={2.5}
-                onDoubleClick={(event) => onDoubleClick(event, id)}
                 className={styles.path}
             />
+
+            <EdgeLabelRenderer>
+                <EditableEdgeLabel
+                    edgeId={id}
+                    label={data.label}
+                    transform={edgeLabelTransform}
+                />
+            </EdgeLabelRenderer>
 
             <EdgeArrow
                 x={targetX - MISSING_PIXELS_ARROW_X}

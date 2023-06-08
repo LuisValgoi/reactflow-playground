@@ -1,25 +1,29 @@
-import React, { DragEvent, memo, MutableRefObject, useCallback } from 'react'
+import React, { DragEvent, memo, useCallback } from 'react'
 import {
-    addEdge,
     Connection,
-    Edge,
-    Node,
-    ReactFlow as ReactFlowOriginal,
+    ReactFlow,
     ReactFlowProps,
+    SelectionMode,
     useEdgesState,
     useNodesState,
 } from 'reactflow'
 
-import { IEdgeType, IMessage } from '@/interfaces'
+import { INodeData } from '@/interfaces'
 
 import { DEFAULT_ZOOM, MAX_ZOOM, MIN_ZOOM } from '@/constants'
 
-import { getNode, isNodeInPane, setMoveEffect } from '@/utils/ReactFlow'
+import {
+    getEdgesForConnection,
+    getNodesForConnection,
+    isDropOperationValid,
+    getNodesForDropping,
+} from '@/utils/ReactFlow'
 
 import { useApp } from '@/providers/AppProvider'
 
 import edgeLines from '@/components/_edges_/edgeLines'
 import edgeTypes from '@/components/_edges_/edgeTypes'
+import edgeInfos from '@/components/_edges_/edgeInfos'
 import nodeTypes from '@/components/_nodes_/nodeTypes'
 
 const Flow: React.FC<ReactFlowProps> = ({ children, ...rest }) => {
@@ -27,63 +31,68 @@ const Flow: React.FC<ReactFlowProps> = ({ children, ...rest }) => {
         skeletonRef,
         reactFlowInstance,
         defaultViewPort,
-        setReactFlowInstance,
+        isSelectionSelected,
     } = useApp()
 
-    const [nodes, setNodes, onNodesChange] = useNodesState<IMessage>([])
+    const [nodes, setNodes, onNodesChange] = useNodesState<INodeData>([])
 
     const [edges, setEdges, onEdgesChange] = useEdgesState([])
 
     const onConnect = useCallback((connection: Connection) => {
-        setNodes((nodes) => nodes.map((node) => ({ ...node, selected: false })))
-        setEdges((edges) => addEdge(connection, edges))
+        setNodes((nodes) => getNodesForConnection(nodes))
+        setEdges((edges) => getEdgesForConnection(edges, connection))
     }, [])
 
     const onDragOver = useCallback((event: DragEvent<HTMLElement>) => {
         event.preventDefault()
-        setMoveEffect(event)
     }, [])
 
     const onDrop = useCallback(
         (event: DragEvent<HTMLElement>) => {
-            if (!isNodeInPane(event as any) || !reactFlowInstance) {
+            if (!isDropOperationValid(event, reactFlowInstance)) {
                 return
             }
 
             event.preventDefault()
-            const ref = skeletonRef as MutableRefObject<HTMLElement>
-            const newNode = getNode(event, ref, reactFlowInstance) as Node
-            setNodes((nodes) => nodes.concat(newNode))
+            setNodes((nodes) =>
+                getNodesForDropping(
+                    event,
+                    skeletonRef,
+                    reactFlowInstance,
+                    nodes
+                )
+            )
         },
         [reactFlowInstance]
     )
 
     return (
-        <ReactFlowOriginal
-            deleteKeyCode={[]}
-            proOptions={{ hideAttribution: true }}
+        <ReactFlow
+            deleteKeyCode={[]} // foi
+            proOptions={{ hideAttribution: true }} // foi
             nodes={nodes}
             edges={edges}
-            defaultViewport={defaultViewPort}
-            fitViewOptions={{ maxZoom: DEFAULT_ZOOM }}
-            maxZoom={MAX_ZOOM}
-            minZoom={MIN_ZOOM}
+            defaultViewport={defaultViewPort} // foi
+            fitViewOptions={{ maxZoom: DEFAULT_ZOOM }} // foi
+            maxZoom={MAX_ZOOM} // foi
+            minZoom={MIN_ZOOM} // foi
             nodeTypes={nodeTypes}
             edgeTypes={edgeTypes}
-            defaultEdgeOptions={{ type: IEdgeType.DEFAULT }}
+            defaultEdgeOptions={edgeInfos}
             connectionLineComponent={edgeLines}
             panOnScroll={true}
-            zoomOnScroll={false}
+            panOnDrag={isSelectionSelected ? [1, 2] : undefined} // foi
+            zoomOnScroll={false} // foi
+            selectionOnDrag // foi
             onNodesChange={onNodesChange}
             onEdgesChange={onEdgesChange}
             onConnect={onConnect}
-            onInit={setReactFlowInstance}
             onDrop={onDrop}
             onDragOver={onDragOver}
             {...rest}
         >
             {children}
-        </ReactFlowOriginal>
+        </ReactFlow>
     )
 }
 

@@ -1,7 +1,6 @@
 import {
     createContext,
     Dispatch,
-    DragEvent,
     RefObject,
     SetStateAction,
     useCallback,
@@ -11,32 +10,38 @@ import {
     useRef,
     useState,
 } from 'react'
-import {
-    ReactFlowInstance,
-    ReactFlowJsonObject,
-    useReactFlow,
-    Viewport,
-} from 'reactflow'
+import { ReactFlowJsonObject, useReactFlow, Viewport } from 'reactflow'
 import { snakeCase } from 'lodash'
 import { useNavigate, useParams } from 'react-router-dom'
+import moment from 'moment'
 
-import { IMessage, INodeType } from '@/interfaces'
+import {
+    FlowInstance,
+    IElementNode,
+    INavBar,
+    INodeData,
+    INodeType,
+} from '@/interfaces'
 
-import { addNode as addNodeUtils, setMoveEffect } from '@/utils/ReactFlow'
 import { DEFAULT_ZOOM } from '@/constants'
 
 type IAppState = {
     skeletonRef: RefObject<HTMLElement>
-    messages: IMessage[]
+    messages: INodeData[]
     canvasName: string
-    reactFlowInstance: ReactFlowInstance | undefined
     defaultViewPort: Viewport
+    reactFlowInstance: FlowInstance
+    editingNode: IElementNode | undefined
+    navBarSelected: INavBar
+    isSelectionSelected: boolean
     saveCanvas: () => void
-    addNode: (event: DragEvent<HTMLElement>, message: IMessage) => void
+    updateNode: (nodeId: string, updatedNodeData: INodeData) => void
     removeNode: (nodeId: string) => void
     removeEdge: (edgeId: string) => void
     setCanvasName: Dispatch<SetStateAction<string>>
-    setReactFlowInstance: Dispatch<ReactFlowInstance>
+    setEditingNode: Dispatch<React.SetStateAction<IElementNode | undefined>>
+    setNavBarSelected: Dispatch<SetStateAction<INavBar>>
+    setIsSelectionSelected: Dispatch<SetStateAction<boolean>>
 }
 
 const AppContext = createContext<IAppState>({} as IAppState)
@@ -46,13 +51,17 @@ export function AppProvider({ children }: { children: JSX.Element }) {
 
     const { canvasId } = useParams<{ canvasId: string }>()
 
-    const { deleteElements } = useReactFlow()
-
-    const [rfInstance, setRfInstance] = useState<ReactFlowInstance>()
+    const reactFlowInstance = useReactFlow()
 
     const initialCanvasName = useAppInitialName(canvasId)
 
     const [canvasName, setCanvasName] = useState(initialCanvasName)
+
+    const [isSelectionSelected, setIsSelectionSelected] = useState(false)
+
+    const [editingNode, setEditingNode] = useState<IElementNode>()
+
+    const [navBarSelected, setNavBarSelected] = useState(INavBar.EDIT)
 
     const navigate = useNavigate()
 
@@ -62,26 +71,36 @@ export function AppProvider({ children }: { children: JSX.Element }) {
 
     const saveCanvas = useCallback(() => {
         const canvasNameKey = snakeCase(canvasName)
-        const canvasObject = rfInstance?.toObject()
+        const canvasObject = reactFlowInstance?.toObject()
         localStorage.setItem(canvasNameKey, JSON.stringify(canvasObject))
         navigate(`/${canvasNameKey}`)
-    }, [rfInstance, canvasName])
+    }, [reactFlowInstance, canvasName])
 
-    const addNode = useCallback(
-        (event: DragEvent<HTMLElement>, message: IMessage) => {
-            addNodeUtils(event, message)
-            setMoveEffect(event)
+    const updateNode = useCallback(
+        (nodeId: string, data: INodeData) => {
+            reactFlowInstance.setNodes((nodes) => {
+                const idx = nodes.findIndex((nd) => nd.id === nodeId)
+                nodes[idx].data = data
+                nodes[idx].type = data.type
+                return nodes
+            })
         },
-        []
+        [reactFlowInstance]
     )
 
-    const removeNode = useCallback((nodeId: string) => {
-        deleteElements({ nodes: [{ id: nodeId }] })
-    }, [])
+    const removeNode = useCallback(
+        (nodeId: string) => {
+            reactFlowInstance.deleteElements({ nodes: [{ id: nodeId }] })
+        },
+        [reactFlowInstance]
+    )
 
-    const removeEdge = useCallback((edgeId: string) => {
-        deleteElements({ edges: [{ id: edgeId }] })
-    }, [])
+    const removeEdge = useCallback(
+        (edgeId: string) => {
+            reactFlowInstance.deleteElements({ edges: [{ id: edgeId }] })
+        },
+        [reactFlowInstance]
+    )
 
     return (
         <AppContext.Provider
@@ -89,14 +108,19 @@ export function AppProvider({ children }: { children: JSX.Element }) {
                 skeletonRef,
                 messages,
                 canvasName,
-                reactFlowInstance: rfInstance,
+                reactFlowInstance,
                 defaultViewPort,
+                editingNode,
+                navBarSelected,
+                isSelectionSelected,
                 setCanvasName,
-                addNode,
+                updateNode,
                 removeNode,
                 removeEdge,
                 saveCanvas,
-                setReactFlowInstance: setRfInstance,
+                setEditingNode,
+                setNavBarSelected,
+                setIsSelectionSelected,
             }}
         >
             {children}
@@ -130,74 +154,59 @@ function useAppCanvasData(canvasId: string | undefined) {
 }
 
 function useAppViewport(canvasId: string | undefined) {
-    const canvasData = useAppCanvasData(canvasId)
+    const canvasViewport = useAppCanvasData(canvasId)?.viewport
 
     const defaultViewPort = useMemo(() => {
-        if (!canvasData) {
+        if (!canvasViewport) {
             return {
                 x: DEFAULT_ZOOM,
                 y: DEFAULT_ZOOM,
                 zoom: DEFAULT_ZOOM,
             } as Viewport
         }
-        return canvasData.viewport
+        return canvasViewport
     }, [canvasId])
 
     return defaultViewPort
 }
 
 function useAppMessages() {
-    const messages: IMessage[] = useMemo(
+    const messages: INodeData[] = useMemo(
         () => [
             {
                 heading: 'USER-08433-Q',
                 type: INodeType.ABC,
-                scheduleInfo: {
-                    week: 'W1',
-                    date: 'MONDAY 9:00 AM',
-                },
+                scheduleDate: moment().add(1, 'days').toDate(),
                 content:
-                    'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
+                    '1Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tristique efficitur est, eget tristique risus laoreet quis',
             },
             {
                 heading: 'USER-08434-Q',
                 type: INodeType.YN,
-                scheduleInfo: {
-                    week: 'W2',
-                    date: 'IMMEDIATE',
-                },
+                scheduleDate: moment().add(2, 'days').toDate(),
                 content:
-                    'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
+                    '2Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tristique efficitur est, eget tristique risus laoreet quis',
             },
             {
                 heading: 'USER-08435-Q',
                 type: INodeType.DEFAULT,
-                scheduleInfo: {
-                    week: 'W4',
-                    date: 'IMMEDIATE',
-                },
+                scheduleDate: moment().add(3, 'days').toDate(),
                 content:
-                    'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
+                    '3Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tristique efficitur est, eget tristique risus laoreet quis',
             },
             {
                 heading: 'USER-08436-Q',
                 type: INodeType.DEFAULT,
-                scheduleInfo: {
-                    week: 'W5',
-                    date: 'IMMEDIATE',
-                },
+                scheduleDate: moment().add(4, 'days').toDate(),
                 content:
-                    'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
+                    '4Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tristique efficitur est, eget tristique risus laoreet quis',
             },
             {
                 heading: 'USER-08437-Q',
                 type: INodeType.DEFAULT,
-                scheduleInfo: {
-                    week: 'W6',
-                    date: 'IMMEDIATE',
-                },
+                scheduleDate: moment().add(5, 'days').toDate(),
                 content:
-                    'Hello from %{provider_short_name}! We want to hear about your experience with our Call Center. Will you answer a quick 4-question text survey to help us improve the Call Center? Reply YES or NO',
+                    '5Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tristique efficitur est, eget tristique risus laoreet quis',
             },
         ],
         []

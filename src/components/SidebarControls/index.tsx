@@ -9,10 +9,9 @@ import React, {
 import classNames from 'classnames'
 import { debounce } from 'lodash'
 
-import Messages from '@/containers/Messages'
-
 import { useApp } from '@/providers/AppProvider'
 
+import Messages from '@/components/SidebarControls/Messages'
 import SearchMessage from '@/components/SidebarControls/SearchMessage'
 import ToggleButton from '@/components/SidebarControls/ToggleButton'
 import Overlay from '@/components/SidebarControls/Overlay'

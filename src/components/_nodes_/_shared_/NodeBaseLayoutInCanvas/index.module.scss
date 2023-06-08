@@ -1,0 +1,97 @@
+.container {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: #ebecf8;
+    gap: 0.5rem;
+    position: relative;
+    cursor: pointer;
+    width: 400px;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+        background-color: #dddfee;
+    }
+
+    &.selected {
+        outline: #5f6ac4 solid 2px;
+    }
+
+    &:focus {
+        outline: #5f6ac4 solid 2px;
+    }
+}
+
+.handleWrapper {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    display: block;
+    opacity: 0.5;
+    transition: all 0.2s ease;
+    width: 100%;
+
+    & > div {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        bottom: -4px;
+        left: calc(50% - 5px);
+        background: #ebecf8;
+        border: 0.5px solid #8790d3;
+        border-radius: 2px;
+    }
+}
+
+.container:hover .handleWrapper {
+    opacity: 1;
+}
+
+.head {
+    background-color: #afb5e1;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: black;
+    border-radius: 0.5rem;
+
+    & p {
+        margin: 0;
+        justify-content: flex-start;
+    }
+
+    & div {
+        margin: 0;
+        justify-content: flex-end;
+    }
+}
+
+.headActions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    position: relative;
+}
+
+.content {
+    background-color: white;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: black;
+    border-radius: 0.5rem;
+    line-break: anywhere;
+}
+
+.footer {
+    display: grid;
+    grid-template-rows: 1;
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+    grid-column-gap: 0.5rem;
+}

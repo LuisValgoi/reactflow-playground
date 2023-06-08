@@ -5,6 +5,7 @@ import InteractiveControls from '@/components/InteractiveControls'
 import SidebarControls from '@/components/SidebarControls'
 import Skeleton from '@/components/Skeleton'
 import TopBarControls from '@/components/TopBarControls'
+import NodeSetting from '@/components/NodeSetting'
 
 import Flow from '@/containers/Flow'
 
@@ -16,6 +17,7 @@ const Home: React.FC = () => {
                 <InteractiveControls />
                 <TopBarControls />
                 <SidebarControls />
+                <NodeSetting />
             </Flow>
         </Skeleton>
     )

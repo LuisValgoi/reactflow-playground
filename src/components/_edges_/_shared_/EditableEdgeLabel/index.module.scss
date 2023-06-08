@@ -1,0 +1,54 @@
+.labelWrapper {
+    position: absolute;
+    z-index: 6;
+
+    padding: 0.25rem 0.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    background-color: #3b479f;
+    border-radius: 0.25rem;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: white;
+
+    pointer-events: painted;
+
+    &:hover {
+        cursor: text;
+        outline: #1e2553 solid 2px;
+    }
+
+    & .labelInput {
+        min-width: 30px;
+        position: relative;
+        background-color: white;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        outline: #5f6ac4 solid 1px;
+        font-size: 15px;
+        font-weight: lighter;
+    }
+}
+
+.labelWrapperForInput {
+    background-color: transparent;
+    padding: 0;
+
+    & .labelInput {
+        font-size: 12px;
+        padding: 0.25rem 0.5rem;
+    }
+
+    &:hover {
+        outline: unset;
+    }
+}
+
+.labelText {
+    margin: 0;
+}

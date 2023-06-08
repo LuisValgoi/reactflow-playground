@@ -15,41 +15,6 @@
     &:hover {
         background-color: #dddfee;
     }
-
-    &.selected {
-        outline: #5f6ac4 solid 2px;
-    }
-}
-
-.container.isOnCanvas {
-    &:focus {
-        outline: #5f6ac4 solid 2px;
-    }
-}
-
-.handleWrapper {
-    position: absolute;
-    top: -2px;
-    left: 0;
-    display: block;
-    opacity: 0.5;
-    transition: all 0.2s ease;
-    width: 100%;
-
-    & > div {
-        position: absolute;
-        width: 12px;
-        height: 12px;
-        bottom: -4px;
-        left: calc(50% - 5px);
-        background: #ebecf8;
-        border: 0.5px solid #8790d3;
-        border-radius: 2px;
-    }
-}
-
-.container:hover .handleWrapper {
-    opacity: 1;
 }
 
 .head {
@@ -63,27 +28,7 @@
 
     & p {
         margin: 0;
-        justify-content: flex-start;
     }
-
-    & div {
-        margin: 0;
-        justify-content: flex-end;
-    }
-
-    & p.tag {
-        padding: 0.25rem 1rem;
-        background-color: white;
-        border-radius: 2rem;
-        font-size: 12px;
-    }
-}
-
-.headActions {
-    display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
-    position: relative;
 }
 
 .content {
@@ -94,11 +39,5 @@
     justify-content: flex-start;
     color: black;
     border-radius: 0.5rem;
-}
-
-.footer {
-    display: grid;
-    grid-template-rows: 1;
-    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
-    grid-column-gap: 0.5rem;
+    line-break: anywhere;
 }

@@ -51,7 +51,7 @@ const EditableCanvasName: React.FC = () => {
                 className={styles.paragraph}
                 onClick={handleTextClickName}
             >
-                <span>Canvas Name: </span>
+                <span>File Name: </span>
                 {canvasName}
             </p>
         </div>

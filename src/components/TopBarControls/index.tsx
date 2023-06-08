@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import React from 'react'
 
-import { ReactComponent as CareMessageIcon } from '@/assets/icons/caremessage.svg'
+import { ReactComponent as LogoIcon } from '@/assets/icons/logo.svg'
 
 import EditableCanvasName from '@/components/TopBarControls/EditableCanvasName'
 
@@ -20,7 +20,7 @@ const TopBarControls: React.FC<ITopBarControls> = ({
 
     return (
         <div className={wrapperClasses} {...restProps}>
-            <CareMessageIcon tabIndex={0} />
+            <LogoIcon tabIndex={0} />
 
             <EditableCanvasName />
 

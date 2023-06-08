@@ -1,34 +1,27 @@
-import { IMessage } from '@/interfaces'
+import { INodeData } from '@/interfaces'
 import { memo } from 'react'
-import { Connection, Handle, NodeProps, Position } from 'reactflow'
+import { Handle, NodeProps, Position } from 'reactflow'
 
-import NodesBaseLayout from '@/components/_nodes_/_shared_/NodeBaseLayout'
+import NodeBaseLayoutInCanvas from '@/components/_nodes_/_shared_/NodeBaseLayoutInCanvas'
 
-type IDefaultNode = NodeProps<IMessage> & { footer?: JSX.Element }
+type IDefaultNode = NodeProps<INodeData> & { footer?: JSX.Element }
 
 const DefaultNode = ({ footer, ...restProps }: IDefaultNode) => {
     return (
-        <NodesBaseLayout
-            // {...restProps}
-            id={restProps.id}
-            selected={restProps.selected}
-            heading={restProps.data.heading}
-            content={restProps.data.content}
-            schedulingInfo={`${restProps.data.scheduleInfo.week} - ${restProps.data.scheduleInfo.date}`}
-            hideControls={false}
+        <NodeBaseLayoutInCanvas
             footer={footer}
             handle={
                 <>
                     <Handle
-                        id={`custom-handle-id-${restProps.id}`}
+                        id={restProps.id}
                         className="nodrag react-flow__handle-valid"
                         type="target"
                         position={Position.Top}
                         isConnectable
-                        isValidConnection={(connection: Connection) => true}
                     />
                 </>
             }
+            {...restProps}
         />
     )
 }

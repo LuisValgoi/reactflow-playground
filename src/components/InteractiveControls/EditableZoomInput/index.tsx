@@ -1,10 +1,5 @@
 import React, { memo, useCallback, useState } from 'react'
-import {
-    ControlButton,
-    ReactFlowInstance,
-    ReactFlowState,
-    useStore,
-} from 'reactflow'
+import { ControlButton, ReactFlowState, useStore } from 'reactflow'
 import classNames from 'classnames'
 
 import { ANIMATE_DURATION, MIN_ZOOM, MAX_ZOOM } from '@/constants'
@@ -13,16 +8,15 @@ import { ReactComponent as MinusIcon } from '@/assets/icons/minus.svg'
 import { ReactComponent as PlusIcon } from '@/assets/icons/plus.svg'
 
 import styles from './index.module.scss'
+import { useApp } from '@/providers/AppProvider'
 
-type IEditableZoomInput = {
-    reactFlowInstance: ReactFlowInstance<any, any> | undefined
-}
+type IEditableZoomInput = {}
 
 const zoomSelector = (state: ReactFlowState) => state.transform[2]
 
-const EditableZoomInput: React.FC<IEditableZoomInput> = ({
-    reactFlowInstance,
-}) => {
+const EditableZoomInput: React.FC<IEditableZoomInput> = () => {
+    const { reactFlowInstance } = useApp()
+
     const zoom = useStore(zoomSelector)
 
     const [showInput, setShowInput] = useState(false)
