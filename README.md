@@ -4,7 +4,7 @@ Repo for playing with ReactFlow.
 
 # Status
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/4a8cbc9a-5f34-458e-9890-b4dc6e74b82f/deploy-status)](https://app.netlify.com/sites/arqbrunaferri/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/cbb76fd3-13a9-426f-aad8-db08acee874c/deploy-status)](https://app.netlify.com/sites/reactflow-playground/deploys)
 
 # Stack/Libs
 
